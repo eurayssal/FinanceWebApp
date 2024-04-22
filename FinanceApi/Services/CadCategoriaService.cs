@@ -34,6 +34,5 @@ namespace FinanceApi.Services
 
         public async Task RemoveAsync(string id) =>
             await _cadCategoriaCollection.DeleteOneAsync(x => x.Id == id);
-
     }
 }

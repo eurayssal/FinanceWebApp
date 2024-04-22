@@ -37,17 +37,10 @@ namespace FinanceApi.Controllers
             if (cadCartao == null) { return NoContent(); }
 
             updateCadCartao.Id = cadCartao.Id;
-            cadCartao.Nome = updateCadCartao.Nome;
 
-            await _cadCartaoService.UpdateAsync(id, cadCartao);
+            await _cadCartaoService.UpdateAsync(id, updateCadCartao);
 
-            return Ok(new
-            {
-                cadCartao.Id,
-                cadCartao.Nome,
-                cadCartao.DiaFechamento,
-                cadCartao.DiaVencimento
-            });
+            return NoContent();
         }
 
         [HttpDelete("{id:length(24)}")]
