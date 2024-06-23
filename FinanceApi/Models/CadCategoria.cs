@@ -3,12 +3,9 @@ using MongoDB.Bson;
 
 namespace FinanceApi.Models
 {
-    public class CadCategoria
+    public class CadCategoria : BaseModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public bool Atividade { get; set; }
     }
 }

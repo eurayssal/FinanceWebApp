@@ -3,12 +3,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace FinanceApi.Models
 {
-    public class CadCartao
+    public class CadCartao : BaseModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public int DiaFechamento { get; set; }
         public int DiaVencimento { get; set; }
     }
