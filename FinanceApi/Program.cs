@@ -1,3 +1,8 @@
+using FinanceApi.Context;
+using FinanceApi.Context.FinanceApi.Context;
+using FinanceApi.Repositories.Implementation;
+using FinanceApi.Repositories.Interface;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Registrar o MongoDbContext e o CadTagRepository
+builder.Services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+builder.Services.AddScoped<ICadTagRepository, CadTagRepository>();
 
 var app = builder.Build();
 
