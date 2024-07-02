@@ -6,6 +6,6 @@ namespace FinanceApi.ViewModels
     {
         public Guid Id { get; set; }
         [Required(ErrorMessage = "O Nome é obrigatório.")]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
     }
 }

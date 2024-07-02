@@ -1,7 +1,9 @@
 using FinanceApi.Context;
 using FinanceApi.Context.FinanceApi.Context;
+using FinanceApi.Repositories;
 using FinanceApi.Repositories.Implementation;
 using FinanceApi.Repositories.Interface;
+using FinanceApi.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Registrar o MongoDbContext e o CadTagRepository
+// Registrar o MongoDbContext e os repositórios
 builder.Services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 builder.Services.AddScoped<ICadTagRepository, CadTagRepository>();
+builder.Services.AddScoped<ICadDespesaRepository, CadDespesaRepository>();
 
 var app = builder.Build();
 
