@@ -1,12 +1,11 @@
 ﻿using FinanceApi.Context;
 using FinanceApi.Models;
-using FinanceApi.Repositories.Interface;
+using FinanceApi.Repositories.Interfaces;
 
-namespace FinanceApi.Repositories.Implementation
+namespace FinanceApi.Repositories.Implementations
 {
     public class CadTagRepository : ICadTagRepository
     {
-
         private readonly IMongoDbContext<CadTag> _context;
         public CadTagRepository(IMongoDbContext<CadTag> context)
         {
@@ -23,7 +22,7 @@ namespace FinanceApi.Repositories.Implementation
             return await _context.GetAllAsync(cancellation);
         }
 
-        public async Task InsertAsync(CadTag cadTag, CancellationToken cancellation)
+        public async Task CreateAsync(CadTag cadTag, CancellationToken cancellation)
         {
             await _context.InsertAsync(cadTag, cancellation);
         }
@@ -33,7 +32,7 @@ namespace FinanceApi.Repositories.Implementation
             await _context.UpdateAsync(cadTag, cancellation);
         }
 
-        public async Task DeleteAsync(Guid id, CancellationToken cancellation)
+        public async Task RemoveAsync(Guid id, CancellationToken cancellation)
         {
             await _context.DeleteAsync(id, cancellation);
         }

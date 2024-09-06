@@ -2,11 +2,22 @@
 {
     public class CadTag : BaseModel
     {
+        #region Campos
+        public string Nome { get; private set; }
+
+        #endregion
+
+        #region Métodos públicos
         public CadTag(string nome)
         {
             Nome = nome;
         }
 
-        public string? Nome { get; set; }
+        public void Update(string nome)
+        {
+            Nome = nome;
+        }
+
+        #endregion
     }
 }

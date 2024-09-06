@@ -1,11 +1,10 @@
-﻿using FinanceApi.Repositories.Interface;
-using FinanceApi.ViewModels;
+﻿using FinanceApi.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.CadTag
 {
     [ApiController]
-    [Route("tag")]
+    [Route("api/tag")]
     public class HomeController : ControllerBase
     {
         private readonly ICadTagRepository _repository;
@@ -14,20 +13,18 @@ namespace FinanceApi.Controllers.CadTag
         {
             _repository = repository;
         }
-
-        [HttpPost, Route("create")]
-        public async Task<IActionResult> PostAsync([FromBody] CadTagViewModel viewModel, CancellationToken cancellation)
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] ViewModel viewModel, CancellationToken cancellation)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var cadTag = new Models.CadTag(viewModel.Nome);
-            await _repository.InsertAsync(cadTag, cancellation);
-
-            return Ok(new { Message = "Tag criada com sucesso.", CadTag = cadTag });
+            await _repository.CreateAsync(cadTag: cadTag, cancellation);
+            return Ok(new { Message = "Tag criada com sucesso." });
         }
 
-        [HttpGet, Route("getAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
         {
             var cadTags = await _repository.GetAllAsync(cancellation);
@@ -35,32 +32,21 @@ namespace FinanceApi.Controllers.CadTag
         }
 
         [HttpPut, Route("update/{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] CadTagViewModel viewModel, CancellationToken cancellation)
+        public async Task<IActionResult> UpdateAsync([FromBody] ViewModel viewModel, CancellationToken cancellation)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var existingCadTag = await _repository.GetAsync(id, cancellation);
+            var cadTag = await _repository.GetAsync(viewModel.Id.Value, cancellation);
 
-            if (existingCadTag == null)
+            cadTag.Update(nome: viewModel.Nome);
+
+            if (cadTag == null)
                 return NotFound();
 
-            existingCadTag.Nome = viewModel.Nome;
-            await _repository.UpdateAsync(existingCadTag, cancellation);
-            return Ok(new { Message = "Tag atualizada com sucesso.", CadTag = existingCadTag });
+            await _repository.UpdateAsync(cadTag, cancellation);
+            return Ok(new { Message = "Tag atualizada com sucesso.", CadTag = cadTag });
         }
 
-        [HttpDelete, Route("delete/{id}")]
-        public async Task<IActionResult> DeleteAsync(Guid id, CancellationToken cancellation)
-        {
-            var existingCadTag = await _repository.GetAsync(id, cancellation);
-
-            if (existingCadTag == null)
-                return NotFound();
-
-            await _repository.DeleteAsync(id, cancellation);
-
-            return Ok(new { Message = "Tag deletada com sucesso." });
-        }
     }
 }
