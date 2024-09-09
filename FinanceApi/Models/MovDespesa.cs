@@ -3,40 +3,25 @@
     public class MovDespesa : BaseModel
     {
         #region Campos
-        public string Nome { get; set; }
-        public decimal Valor { get; set; }
-        public DateTime DataLancamento { get; set; }
-        public bool Status { get; set; }
-        public CTag Tag { get; set; }
+        public string Descricao { get; private set; }
+        public decimal Valor { get; private set; }
+        public bool isPago { get; private set; }
 
         #endregion
 
         #region Métodos públicos
-        public MovDespesa(string nome, decimal valor, bool status, CadTag cadTag)
+        public MovDespesa(string descricao, decimal valor, bool isPago)
         {
-            Nome = nome;
+            Descricao = descricao;
             Valor = valor;
-            DataLancamento = DateTime.Today;
-            Status = status;
-            Tag = new CTag(cadTag);
+            this.isPago = isPago;
         }
 
-        public void Update(string nome, decimal valor, bool status, CadTag cadTag)
+        public void Update(string descricao, decimal valor, bool isPago)
         {
-            Nome = nome;
+            Descricao = descricao;
             Valor = valor;
-            DataLancamento = DateTime.Today;
-            Status = status;
-            Tag = new CTag(cadTag);
-        }
-
-        #endregion
-
-        #region Classes
-        public class CTag(CadTag cadTag)
-        {
-            public Guid Id { get; private set; } = cadTag.Id;
-            public string Nome { get; private set; } = cadTag.Nome;
+            this.isPago = isPago;
         }
 
         #endregion

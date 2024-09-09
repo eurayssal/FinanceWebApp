@@ -5,16 +5,17 @@ namespace FinanceApi.Controllers.CadTag
 {
     [ApiController]
     [Route("api/tag")]
-    public class HomeController : ControllerBase
+    public class CadTagController : ControllerBase
     {
         private readonly ICadTagRepository _repository;
 
-        public HomeController(ICadTagRepository repository)
+        public CadTagController(ICadTagRepository repository)
         {
             _repository = repository;
         }
+
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] ViewModel viewModel, CancellationToken cancellation)
+        public async Task<IActionResult> PostAsync(CadTagViewModel viewModel, CancellationToken cancellation)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -32,7 +33,7 @@ namespace FinanceApi.Controllers.CadTag
         }
 
         [HttpPut, Route("update/{id}")]
-        public async Task<IActionResult> UpdateAsync([FromBody] ViewModel viewModel, CancellationToken cancellation)
+        public async Task<IActionResult> UpdateAsync([FromBody] CadTagViewModel viewModel, CancellationToken cancellation)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -47,6 +48,5 @@ namespace FinanceApi.Controllers.CadTag
             await _repository.UpdateAsync(cadTag, cancellation);
             return Ok(new { Message = "Tag atualizada com sucesso.", CadTag = cadTag });
         }
-
     }
 }

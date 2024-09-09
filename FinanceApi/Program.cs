@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // Registrar o MongoDbContext e os repositórios
 builder.Services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 builder.Services.AddScoped<ICadTagRepository, CadTagRepository>();
+builder.Services.AddScoped<IMovDespesaRepository, MovDespesaRepository>();
 //builder.Services.AddScoped<ICadDespesaRepository, CadDespesaRepository>();
 
 var app = builder.Build();
