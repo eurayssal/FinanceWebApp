@@ -9,11 +9,13 @@ namespace FinanceApi.Controllers.MovDespesa
     {
         private readonly IMovDespesaRepository _repository;
         private readonly ICadTagRepository _tagRepository;
+        private readonly ICadContaRepository _contaRepository;
 
-        public MovDespesaController(IMovDespesaRepository repository, ICadTagRepository tagRepository)
+        public MovDespesaController(IMovDespesaRepository repository, ICadTagRepository tagRepository, ICadContaRepository contaRepository)
         {
             _repository = repository;
             _tagRepository = tagRepository;
+            _contaRepository = contaRepository;
         }
 
         [HttpGet]
@@ -34,13 +36,23 @@ namespace FinanceApi.Controllers.MovDespesa
         public async Task<IActionResult> PostAsync(MovDespesaViewModel viewModel, CancellationToken cancellation)
         {
             Models.CadTag? cadTag = null;
+            Models.CadConta cadConta = null;
+
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
                 cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
             }
+
+            if (viewModel.Conta != null && viewModel.Conta.Value != Guid.Empty)
+            {
+                cadConta = await _contaRepository.GetByIdAsync(viewModel.Conta.Value, cancellation);
+            }
+
             var movDespesa = new Models.MovDespesa(viewModel.Descricao,
                 viewModel.Valor,
                 viewModel.IsPago,
+                viewModel.DataLancamento,
+                cadConta: cadConta,
                 cadTag: cadTag);
 
             await _repository.CreateAsync(movDespesa: movDespesa, cancellation);
@@ -53,16 +65,24 @@ namespace FinanceApi.Controllers.MovDespesa
             var movDespesa = await _repository.GetByIdAsync(viewModel.Id.Value, cancellation);
 
             Models.CadTag? cadTag = null;
+            Models.CadConta? cadConta = null;
+
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
                 cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
             }
 
+            if (viewModel.Conta != null && viewModel.Conta.Value != Guid.Empty)
+            {
+                cadConta = await _contaRepository.GetByIdAsync(viewModel.Conta.Value, cancellation);
+            }
 
-            movDespesa.Update(descricao: viewModel.Descricao,
-            valor: viewModel.Valor,
-            isPago: viewModel.IsPago,
-            cadTag: cadTag);
+            movDespesa.Update(viewModel.Descricao,
+                viewModel.Valor,
+                viewModel.IsPago,
+                viewModel.DataLancamento,
+                cadConta: cadConta,
+                cadTag: cadTag);
 
             await _repository.UpdateAsync(movDespesa, cancellation);
 
@@ -75,22 +95,5 @@ namespace FinanceApi.Controllers.MovDespesa
             _repository.RemoveAsync(id, cancellation);
             return Ok(new { Message = "Despesa removida com sucesso." });
         }
-
-        //[HttpPut, Route("update/{id}")]
-        //public async Task<IActionResult> UpdateAsync([FromBody] ViewModel viewModel, CancellationToken cancellation)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-
-        //    var cadTag = await _repository.GetAsync(viewModel.Id.Value, cancellation);
-
-        //    cadTag.Update(nome: viewModel.Nome);
-
-        //    if (cadTag == null)
-        //        return NotFound();
-
-        //    await _repository.UpdateAsync(cadTag, cancellation);
-        //    return Ok(new { Message = "Tag atualizada com sucesso.", CadTag = cadTag });
-        //}
     }
 }

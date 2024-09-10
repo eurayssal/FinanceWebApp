@@ -11,5 +11,6 @@ namespace FinanceApi.Controllers.MovDespesa
         public DateTime DataLancamento { get; set; }
         public bool IsPago { get; set; }
         public AutocompleteResponseOption<Guid>? Tag { get; set; }
+        public AutocompleteResponseOption<Guid>? Conta { get; set; }
     }
 }
