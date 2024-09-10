@@ -43,7 +43,7 @@ namespace FinanceApi.Context
                 await MongoCollection.ReplaceOneAsync(w => w.Id == model.Id, model, cancellationToken: cancellation);
             }
 
-            public async Task DeleteAsync(Guid id, CancellationToken cancellation)
+            public async Task RemoveAsync(Guid id, CancellationToken cancellation)
             {
                 await MongoCollection.DeleteOneAsync(w => w.Id == id, cancellation);
             }

@@ -34,7 +34,7 @@ namespace FinanceApi.Repositories.Implementations
 
         public async Task RemoveAsync(Guid id, CancellationToken cancellation)
         {
-            await _context.DeleteAsync(id, cancellation);
+            await _context.RemoveAsync(id, cancellation);
         }
     }
 }
