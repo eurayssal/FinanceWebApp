@@ -7,6 +7,7 @@ namespace FinanceApi.Repositories.Implementations
     public class CadContaRepository : ICadContaRepository
     {
         private readonly IMongoDbContext<CadConta> _context;
+        private readonly IMongoDbContext<MovDespesa> _movDespesaContext;
 
         public CadContaRepository(IMongoDbContext<CadConta> context)
         {

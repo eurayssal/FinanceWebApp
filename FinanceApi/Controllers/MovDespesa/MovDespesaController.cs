@@ -36,7 +36,7 @@ namespace FinanceApi.Controllers.MovDespesa
         public async Task<IActionResult> PostAsync(MovDespesaViewModel viewModel, CancellationToken cancellation)
         {
             Models.CadTag? cadTag = null;
-            Models.CadConta cadConta = null;
+            Models.CadConta? cadConta = null;
 
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
@@ -46,6 +46,8 @@ namespace FinanceApi.Controllers.MovDespesa
             if (viewModel.Conta != null && viewModel.Conta.Value != Guid.Empty)
             {
                 cadConta = await _contaRepository.GetByIdAsync(viewModel.Conta.Value, cancellation);
+                cadConta.SubtrairSaldo(viewModel.Valor);
+                await _contaRepository.UpdateAsync(cadConta, cancellation);
             }
 
             var movDespesa = new Models.MovDespesa(viewModel.Descricao,
@@ -95,5 +97,8 @@ namespace FinanceApi.Controllers.MovDespesa
             _repository.RemoveAsync(id, cancellation);
             return Ok(new { Message = "Despesa removida com sucesso." });
         }
+
+
+
     }
 }

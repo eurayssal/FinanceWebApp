@@ -7,7 +7,7 @@ namespace FinanceApi.Controllers.CadConta
     {
         [Required(ErrorMessage = "O Nome é obrigatório.")]
         public string Nome { get; set; }
-        public double Saldo { get; set; }
+        public decimal Saldo { get; set; }
         public bool Status { get; set; }
     }
 }
