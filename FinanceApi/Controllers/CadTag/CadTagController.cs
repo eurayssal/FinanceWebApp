@@ -14,7 +14,21 @@ namespace FinanceApi.Controllers.CadTag
             _repository = repository;
         }
 
-        [HttpPost]
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
+        {
+            var cadTags = await _repository.GetAllAsync(cancellation);
+            return Ok(cadTags);
+        }
+
+        [HttpGet, Route("{id}")]
+        public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellation)
+        {
+            var cadTags = await _repository.GetByIdAsync(id, cancellation);
+            return Ok(cadTags);
+        }
+
+        [HttpPost, Route("create")]
         public async Task<IActionResult> PostAsync(CadTagViewModel viewModel, CancellationToken cancellation)
         {
             if (!ModelState.IsValid)
@@ -25,20 +39,13 @@ namespace FinanceApi.Controllers.CadTag
             return Ok(new { Message = "Tag criada com sucesso." });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
-        {
-            var cadTags = await _repository.GetAllAsync(cancellation);
-            return Ok(cadTags);
-        }
-
         [HttpPut, Route("update/{id}")]
         public async Task<IActionResult> UpdateAsync([FromBody] CadTagViewModel viewModel, CancellationToken cancellation)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var cadTag = await _repository.GetAsync(viewModel.Id.Value, cancellation);
+            var cadTag = await _repository.GetByIdAsync(viewModel.Id.Value, cancellation);
 
             cadTag.Update(nome: viewModel.Nome);
 
@@ -47,6 +54,13 @@ namespace FinanceApi.Controllers.CadTag
 
             await _repository.UpdateAsync(cadTag, cancellation);
             return Ok(new { Message = "Tag atualizada com sucesso.", CadTag = cadTag });
+        }
+
+        [HttpDelete, Route("delete/{id}")]
+        public async Task<IActionResult> RemoveAsync(Guid id, CancellationToken cancellation)
+        {
+            await _repository.RemoveAsync(id, cancellation);
+            return Ok(new { Message = "Tag removida com sucesso." });
         }
     }
 }

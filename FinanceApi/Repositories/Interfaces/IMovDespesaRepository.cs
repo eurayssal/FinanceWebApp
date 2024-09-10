@@ -12,7 +12,7 @@ namespace FinanceApi.Repositories.Interfaces
         /// <summary>
         /// Retorna um dado específico para a tela.
         /// </summary>
-        Task<MovDespesa> GetAsync(Guid id, CancellationToken cancellation);
+        Task<MovDespesa> GetByIdAsync(Guid id, CancellationToken cancellation);
 
         /// <summary>
         /// Atualiza todos os campos alterados do dado.

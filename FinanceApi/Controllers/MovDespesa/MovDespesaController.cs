@@ -16,14 +16,27 @@ namespace FinanceApi.Controllers.MovDespesa
             _tagRepository = tagRepository;
         }
 
-        [HttpPost]
-        [Route("create-despesa")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
+        {
+            var cadTags = await _repository.GetAllAsync(cancellation);
+            return Ok(cadTags);
+        }
+
+        [HttpGet, Route("{id}")]
+        public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellation)
+        {
+            var cadTags = await _repository.GetByIdAsync(id, cancellation);
+            return Ok(cadTags);
+        }
+
+        [HttpPost, Route("create")]
         public async Task<IActionResult> PostAsync(MovDespesaViewModel viewModel, CancellationToken cancellation)
         {
             Models.CadTag? cadTag = null;
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
-                cadTag = await _tagRepository.GetAsync(viewModel.Tag.Value, cancellation);
+                cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
             }
             var movDespesa = new Models.MovDespesa(viewModel.Descricao,
                 viewModel.Valor,
@@ -31,14 +44,36 @@ namespace FinanceApi.Controllers.MovDespesa
                 cadTag: cadTag);
 
             await _repository.CreateAsync(movDespesa: movDespesa, cancellation);
-            return Ok(new { Message = "Tag criada com sucesso." });
+            return Ok(new { Message = "Despesa criada com sucesso." });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
+        [HttpPut, Route("update/{id}")]
+        public async Task<IActionResult> UpdateAsync(Guid id, MovDespesaViewModel viewModel, CancellationToken cancellation)
         {
-            var cadTags = await _repository.GetAllAsync(cancellation);
-            return Ok(cadTags);
+            var movDespesa = await _repository.GetByIdAsync(viewModel.Id.Value, cancellation);
+
+            Models.CadTag? cadTag = null;
+            if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
+            {
+                cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
+            }
+
+
+            movDespesa.Update(descricao: viewModel.Descricao,
+            valor: viewModel.Valor,
+            isPago: viewModel.IsPago,
+            cadTag: cadTag);
+
+            await _repository.UpdateAsync(movDespesa, cancellation);
+
+            return Ok(new { Message = "Despesa atualizada com sucesso." });
+        }
+
+        [HttpDelete, Route("delete/{id}")]
+        public async Task<IActionResult> RemoveAsync(Guid id, CancellationToken cancellation)
+        {
+            _repository.RemoveAsync(id, cancellation);
+            return Ok(new { Message = "Despesa removida com sucesso." });
         }
 
         //[HttpPut, Route("update/{id}")]

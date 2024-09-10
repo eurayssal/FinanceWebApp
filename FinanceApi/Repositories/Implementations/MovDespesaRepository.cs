@@ -13,7 +13,7 @@ namespace FinanceApi.Repositories.Implementations
             _context = context;
         }
 
-        public async Task<MovDespesa> GetAsync(Guid id, CancellationToken cancellation)
+        public async Task<MovDespesa> GetByIdAsync(Guid id, CancellationToken cancellation)
         {
             return await _context.GetAsync(id, cancellation);
         }

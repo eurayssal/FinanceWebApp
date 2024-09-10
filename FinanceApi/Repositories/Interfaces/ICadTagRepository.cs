@@ -12,7 +12,7 @@ namespace FinanceApi.Repositories.Interfaces
         /// <summary>
         /// Retorna um dado específico para a tela.
         /// </summary>
-        Task<CadTag> GetAsync(Guid id, CancellationToken cancellation);
+        Task<CadTag> GetByIdAsync(Guid id, CancellationToken cancellation);
 
         /// <summary>
         /// Atualiza todos os campos alterados do dado.
