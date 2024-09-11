@@ -31,6 +31,11 @@
             Saldo -= valor;
         }
 
+        public void SomarSaldo(decimal valor)
+        {
+            Saldo += valor;
+        }
+
         #endregion
     }
 }

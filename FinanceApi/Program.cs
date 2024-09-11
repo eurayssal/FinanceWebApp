@@ -17,7 +17,7 @@ builder.Services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 builder.Services.AddScoped<ICadTagRepository, CadTagRepository>();
 builder.Services.AddScoped<ICadContaRepository, CadContaRepository>();
 builder.Services.AddScoped<IMovDespesaRepository, MovDespesaRepository>();
-//builder.Services.AddScoped<ICadDespesaRepository, CadDespesaRepository>();
+builder.Services.AddScoped<IMovReceitaRepository, MovReceitaRepository>();
 
 var app = builder.Build();
 

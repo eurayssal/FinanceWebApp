@@ -1,18 +1,16 @@
 ﻿namespace FinanceApi.Models
 {
-    public class MovDespesa : BaseModel
+    public class MovReceita : BaseModel
     {
-        #region Campos
         public string Descricao { get; private set; }
         public decimal Valor { get; private set; }
         public DateTime DataLancamento { get; private set; }
         public CCadTag? Tag { get; private set; }
         public CCadConta? Conta { get; private set; }
 
-        #endregion
-
         #region Métodos públicos
-        public MovDespesa(string descricao, decimal valor, DateTime dataLancamento, CadConta? cadConta = null, CadTag? cadTag = null)
+
+        public MovReceita(string descricao, decimal valor, DateTime dataLancamento, CadConta? cadConta = null, CadTag? cadTag = null)
         {
             Descricao = descricao;
             Valor = valor;
@@ -34,16 +32,16 @@
 
         #region Classes
 
-        public class CCadTag(CadTag cadTag)
-        {
-            public Guid Id { get; private set; } = cadTag.Id;
-            public string Nome { get; private set; } = cadTag.Nome;
-        }
-
         public class CCadConta(CadConta cadConta)
         {
             public Guid Id { get; private set; } = cadConta.Id;
             public string Nome { get; private set; } = cadConta.Nome;
+        }
+
+        public class CCadTag(CadTag cadTag)
+        {
+            public Guid Id { get; private set; } = cadTag.Id;
+            public string Nome { get; private set; } = cadTag.Nome;
         }
 
         #endregion
