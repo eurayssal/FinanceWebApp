@@ -14,7 +14,7 @@
         {
             Descricao = descricao;
             Valor = valor;
-            DataLancamento = dataLancamento;
+            DataLancamento = dataLancamento.Date;
             Tag = cadTag != null ? new CCadTag(cadTag) : null;
             Conta = cadConta != null ? new CCadConta(cadConta) : null;
         }
@@ -23,7 +23,7 @@
         {
             Descricao = descricao;
             Valor = valor;
-            DataLancamento = dataLancamento;
+            DataLancamento = dataLancamento.Date;
             Conta = cadConta != null ? new CCadConta(cadConta) : null;
             Tag = cadTag != null ? new CCadTag(cadTag) : null;
         }
