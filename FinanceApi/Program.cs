@@ -18,6 +18,7 @@ builder.Services.AddScoped<ICadTagRepository, CadTagRepository>();
 builder.Services.AddScoped<ICadContaRepository, CadContaRepository>();
 builder.Services.AddScoped<IMovDespesaRepository, MovDespesaRepository>();
 builder.Services.AddScoped<IMovReceitaRepository, MovReceitaRepository>();
+builder.Services.AddScoped<ICadCartaoRepository, CadCartaoRepository>();
 
 var app = builder.Build();
 
