@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from 'react'
 import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, RigthConteiner, TopBar } from './jss'
-import { ThemeContext } from '@emotion/react';
 
 const AppLayout: React.FC<PropsWithChildren> = ({
     children

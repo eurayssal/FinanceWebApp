@@ -1,7 +1,7 @@
 import React from "react";
-import IButtonProps from "./props";
+import IButtonUiProps from "./props";
 
-const ButtonUi: React.FC<IButtonProps> = ({
+const ButtonUi: React.FC<IButtonUiProps> = ({
     text, onClick
 }) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
