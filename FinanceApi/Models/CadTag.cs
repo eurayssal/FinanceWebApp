@@ -1,17 +1,13 @@
 ﻿namespace FinanceApi.Models
 {
-    public class CadTag : BaseModel
+    public class CadTag(string nome) : BaseModel
     {
         #region Campos
-        public string Nome { get; private set; }
+        public string Nome { get; private set; } = nome;
 
         #endregion
 
         #region Métodos públicos
-        public CadTag(string nome)
-        {
-            Nome = nome;
-        }
 
         public void Update(string nome)
         {

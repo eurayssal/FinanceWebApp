@@ -1,23 +1,16 @@
 ﻿namespace FinanceApi.Models
 {
-    public class CadConta : BaseModel
+    public class CadConta(string nome, decimal saldo, bool status) : BaseModel
     {
         #region Campos
 
-        public string Nome { get; private set; }
-        public decimal Saldo { get; private set; }
-        public bool Status { get; private set; }
+        public string Nome { get; private set; } = nome;
+        public decimal Saldo { get; private set; } = saldo;
+        public bool Status { get; private set; } = status;
 
         #endregion
 
-        #region Métodos púbicos
-
-        public CadConta(string nome, decimal saldo, bool status)
-        {
-            Nome = nome;
-            Saldo = saldo;
-            Status = status;
-        }
+        #region Métodos públicos
 
         public void Update(string nome, decimal saldo, bool status)
         {
