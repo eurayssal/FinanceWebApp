@@ -21,16 +21,16 @@ namespace FinanceApi.Context
                 get => _database.GetCollection<T>($"{typeof(T).Name}");
             }
 
-            private IMongoQueryable<T> MongoQueryable => MongoCollection.AsQueryable();
+            public IMongoQueryable<T> Query => MongoCollection.AsQueryable();
 
             public async Task<List<T>> GetAllAsync(CancellationToken cancellation)
             {
-                return await MongoQueryable.ToListAsync(cancellation);
+                return await Query.ToListAsync(cancellation);
             }
 
             public async Task<T> GetAsync(Guid id, CancellationToken cancellation)
             {
-                return await MongoQueryable.Where(x => x.Id == id).SingleOrDefaultAsync(cancellation);
+                return await Query.Where(x => x.Id == id).SingleOrDefaultAsync(cancellation);
             }
 
             public async Task InsertAsync(T model, CancellationToken cancellation)

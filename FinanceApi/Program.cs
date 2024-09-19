@@ -2,6 +2,9 @@ using FinanceApi.Context;
 using FinanceApi.Context.FinanceApi.Context;
 using FinanceApi.Repositories.Implementations;
 using FinanceApi.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,21 @@ builder.Services.AddScoped<ICadContaRepository, CadContaRepository>();
 builder.Services.AddScoped<IMovDespesaRepository, MovDespesaRepository>();
 builder.Services.AddScoped<IMovReceitaRepository, MovReceitaRepository>();
 builder.Services.AddScoped<ICadCartaoRepository, CadCartaoRepository>();
+builder.Services.AddScoped<ICadUsuarioRepository, CadUsuarioRepository>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "batata.com",
+        ValidAudience = "batata.com",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretKey"))
+    };
+});
 
 var app = builder.Build();
 
