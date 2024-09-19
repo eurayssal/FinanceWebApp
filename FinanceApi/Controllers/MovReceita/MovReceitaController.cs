@@ -41,12 +41,12 @@ namespace FinanceApi.Controllers.MovReceita
 
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
-                cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
+                cadTag = await _tagRepository.GetAsync(viewModel.Tag.Value, cancellation);
             }
 
             if (viewModel.Conta != null && viewModel.Conta.Value != Guid.Empty)
             {
-                cadConta = await _contaRepository.GetByIdAsync(viewModel.Conta.Value, cancellation);
+                cadConta = await _contaRepository.GetAsync(viewModel.Conta.Value, cancellation);
                 cadConta.SomarSaldo(viewModel.Valor);
                 await _contaRepository.UpdateAsync(cadConta, cancellation);
             }
@@ -57,7 +57,7 @@ namespace FinanceApi.Controllers.MovReceita
                 cadConta: cadConta,
             cadTag: cadTag);
 
-            await _repository.CreateAsync(movReceita: movReceita, cancellation);
+            await _repository.InsertAsync(movReceita, cancellation);
             return Ok(new { Message = "Despesa criada com sucesso." });
         }
 
@@ -67,16 +67,16 @@ namespace FinanceApi.Controllers.MovReceita
             Models.CadTag? cadTag = null;
             Models.CadConta? cadConta = null;
 
-            var movReceita = await _repository.GetByIdAsync(viewModel.Tag.Value, cancellation);
+            var movReceita = await _repository.GetAsync(viewModel.Tag.Value, cancellation);
 
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
-                cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
+                cadTag = await _tagRepository.GetAsync(viewModel.Tag.Value, cancellation);
             }
 
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
-                cadConta = await _contaRepository.GetByIdAsync(viewModel.Conta.Value, cancellation);
+                cadConta = await _contaRepository.GetAsync(viewModel.Conta.Value, cancellation);
             }
 
             movReceita.Update(viewModel.Descricao,

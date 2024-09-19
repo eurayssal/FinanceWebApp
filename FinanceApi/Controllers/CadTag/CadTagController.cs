@@ -24,7 +24,7 @@ namespace FinanceApi.Controllers.CadTag
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellation)
         {
-            var cadTags = await _repository.GetByIdAsync(id, cancellation);
+            var cadTags = await _repository.GetAsync(id, cancellation);
             return Ok(cadTags);
         }
 
@@ -35,7 +35,7 @@ namespace FinanceApi.Controllers.CadTag
                 return BadRequest(ModelState);
 
             var cadTag = new Models.CadTag(viewModel.Nome);
-            await _repository.CreateAsync(cadTag: cadTag, cancellation);
+            await _repository.InsertAsync(cadTag, cancellation);
             return Ok(new { Message = "Tag criada com sucesso." });
         }
 
@@ -45,7 +45,7 @@ namespace FinanceApi.Controllers.CadTag
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var cadTag = await _repository.GetByIdAsync(viewModel.Id.Value, cancellation);
+            var cadTag = await _repository.GetAsync(viewModel.Id.Value, cancellation);
 
             cadTag.Update(nome: viewModel.Nome);
 

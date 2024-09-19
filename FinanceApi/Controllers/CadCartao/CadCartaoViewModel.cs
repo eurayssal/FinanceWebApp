@@ -13,5 +13,6 @@ namespace FinanceApi.Controllers.CadCartao
 
         [Required(ErrorMessage = "DataFechamento é obrigatória.")]
         public DateTime DataFechamento { get; set; }
+        public decimal ValorFatura { get; set; }
     }
 }

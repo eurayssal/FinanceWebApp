@@ -24,7 +24,7 @@ namespace FinanceApi.Controllers.CadConta
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellation)
         {
-            var cadConta = await _repository.GetByIdAsync(id, cancellation);
+            var cadConta = await _repository.GetAsync(id, cancellation);
             return Ok(cadConta);
         }
 
@@ -35,14 +35,14 @@ namespace FinanceApi.Controllers.CadConta
                 saldo: viewModel.Saldo,
                 status: viewModel.Status);
 
-            await _repository.CreateAsync(cadConta, cancellation);
+            await _repository.InsertAsync(cadConta, cancellation);
             return Ok(new { Message = "Conta criada com sucesso." });
         }
 
         [HttpPut, Route("update/{id}")]
         public async Task<IActionResult> UpdateAsync(CadContaViewModel viewModel, CancellationToken cancellation)
         {
-            var cadConta = await _repository.GetByIdAsync(viewModel.Id.Value, cancellation);
+            var cadConta = await _repository.GetAsync(viewModel.Id.Value, cancellation);
 
             cadConta.Update(nome: viewModel.Nome,
                 saldo: viewModel.Saldo,

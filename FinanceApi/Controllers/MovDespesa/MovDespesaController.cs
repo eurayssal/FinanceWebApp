@@ -28,7 +28,7 @@ namespace FinanceApi.Controllers.MovDespesa
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellation)
         {
-            var movDespesa = await _repository.GetByIdAsync(id, cancellation);
+            var movDespesa = await _repository.GetAsync(id, cancellation);
             return Ok(movDespesa);
         }
 
@@ -40,12 +40,12 @@ namespace FinanceApi.Controllers.MovDespesa
 
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
-                cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
+                cadTag = await _tagRepository.GetAsync(viewModel.Tag.Value, cancellation);
             }
 
             if (viewModel.Conta != null && viewModel.Conta.Value != Guid.Empty)
             {
-                cadConta = await _contaRepository.GetByIdAsync(viewModel.Conta.Value, cancellation);
+                cadConta = await _contaRepository.GetAsync(viewModel.Conta.Value, cancellation);
                 cadConta.SubtrairSaldo(viewModel.Valor);
                 await _contaRepository.UpdateAsync(cadConta, cancellation);
             }
@@ -56,26 +56,26 @@ namespace FinanceApi.Controllers.MovDespesa
                 cadConta: cadConta,
                 cadTag: cadTag);
 
-            await _repository.CreateAsync(movDespesa: movDespesa, cancellation);
+            await _repository.InsertAsync(movDespesa, cancellation);
             return Ok(new { Message = "Despesa criada com sucesso." });
         }
 
         [HttpPut, Route("update/{id}")]
         public async Task<IActionResult> UpdateAsync(Guid id, MovDespesaViewModel viewModel, CancellationToken cancellation)
         {
-            var movDespesa = await _repository.GetByIdAsync(viewModel.Id.Value, cancellation);
+            var movDespesa = await _repository.GetAsync(viewModel.Id.Value, cancellation);
 
             Models.CadTag? cadTag = null;
             Models.CadConta? cadConta = null;
 
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
-                cadTag = await _tagRepository.GetByIdAsync(viewModel.Tag.Value, cancellation);
+                cadTag = await _tagRepository.GetAsync(viewModel.Tag.Value, cancellation);
             }
 
             if (viewModel.Conta != null && viewModel.Conta.Value != Guid.Empty)
             {
-                cadConta = await _contaRepository.GetByIdAsync(viewModel.Conta.Value, cancellation);
+                cadConta = await _contaRepository.GetAsync(viewModel.Conta.Value, cancellation);
             }
 
             movDespesa.Update(viewModel.Descricao,

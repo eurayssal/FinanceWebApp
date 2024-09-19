@@ -24,7 +24,7 @@ namespace FinanceApi.Controllers.CadCartao
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellation)
         {
-            var cadCartao = await _repository.GetByIdAsync(id, cancellation);
+            var cadCartao = await _repository.GetAsync(id, cancellation);
             return Ok(cadCartao);
         }
 
@@ -33,20 +33,22 @@ namespace FinanceApi.Controllers.CadCartao
         {
             var cadCartao = new Models.CadCartao(nome: viewModel.Nome,
                dataFechamento: viewModel.DataFechamento,
-               dataVencimento: viewModel.DataFechamento);
+               dataVencimento: viewModel.DataFechamento,
+               valorFatura: viewModel.ValorFatura);
 
-            await _repository.CreateAsync(cadCartao, cancellation);
+            await _repository.InsertAsync(cadCartao, cancellation);
             return Ok(new { Message = "Cartão criado com sucesso." });
         }
 
         [HttpPut, Route("update/{id}")]
         public async Task<IActionResult> UpdateAsync(CadCartaoViewModel viewModel, CancellationToken cancellation)
         {
-            var cadCartao = await _repository.GetByIdAsync(viewModel.Id.Value, cancellation);
+            var cadCartao = await _repository.GetAsync(viewModel.Id.Value, cancellation);
 
             cadCartao.Update(nome: viewModel.Nome,
                dataFechamento: viewModel.DataFechamento,
-               dataVencimento: viewModel.DataFechamento);
+               dataVencimento: viewModel.DataFechamento,
+               saldo: viewModel.ValorFatura);
 
             await _repository.UpdateAsync(cadCartao, cancellation);
             return Ok(new { Message = "Cartão criado com sucesso." });

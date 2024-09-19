@@ -1,41 +1,11 @@
-﻿using FinanceApi.Context;
+﻿using FinanceApi.Context.FinanceApi.Context;
 using FinanceApi.Models;
 using FinanceApi.Repositories.Interfaces;
 
 namespace FinanceApi.Repositories.Implementations
 {
-    public class MovDespesaRepository : IMovDespesaRepository
+    public class MovDespesaRepository : MongoDbContext<MovDespesa>, IMovDespesaRepository
     {
-        private readonly IMongoDbContext<MovDespesa> _context;
 
-        public MovDespesaRepository(IMongoDbContext<MovDespesa> context)
-        {
-            _context = context;
-        }
-
-        public async Task<MovDespesa> GetByIdAsync(Guid id, CancellationToken cancellation)
-        {
-            return await _context.GetAsync(id, cancellation);
-        }
-
-        public async Task<List<MovDespesa>> GetAllAsync(CancellationToken cancellation)
-        {
-            return await _context.GetAllAsync(cancellation);
-        }
-
-        public async Task CreateAsync(MovDespesa movDespesa, CancellationToken cancellation)
-        {
-            await _context.InsertAsync(movDespesa, cancellation);
-        }
-
-        public async Task UpdateAsync(MovDespesa movDespesa, CancellationToken cancellation)
-        {
-            await _context.UpdateAsync(movDespesa, cancellation);
-        }
-
-        public async Task RemoveAsync(Guid id, CancellationToken cancellation)
-        {
-            await _context.RemoveAsync(id, cancellation);
-        }
     }
 }
