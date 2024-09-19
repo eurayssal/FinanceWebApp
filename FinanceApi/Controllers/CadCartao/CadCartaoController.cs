@@ -48,7 +48,7 @@ namespace FinanceApi.Controllers.CadCartao
             cadCartao.Update(nome: viewModel.Nome,
                dataFechamento: viewModel.DataFechamento,
                dataVencimento: viewModel.DataFechamento,
-               saldo: viewModel.ValorFatura);
+               valorFatura: viewModel.ValorFatura);
 
             await _repository.UpdateAsync(cadCartao, cancellation);
             return Ok(new { Message = "Cartão criado com sucesso." });
