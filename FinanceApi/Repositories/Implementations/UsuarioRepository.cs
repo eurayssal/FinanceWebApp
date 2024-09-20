@@ -10,11 +10,9 @@ namespace FinanceApi.Repositories.Implementations
     {
         public async Task<Usuario> GetByEmailAsync(string email, CancellationToken cancellation)
         {
-            var x = await Query
+            return await Query
                 .Where(w => w.Email == email)
                 .SingleOrDefaultAsync(cancellation);
-
-            return x;
 
         }
     }

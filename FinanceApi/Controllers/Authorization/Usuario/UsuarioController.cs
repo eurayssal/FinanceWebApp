@@ -19,18 +19,27 @@ namespace FinanceApi.Controllers.Authorization.Usuario
         {
             try
             {
+                var usuarioExistente = await _repository.GetByEmailAsync(viewModel.Email, cancellation);
+
+                if (usuarioExistente != null)
+                {
+                    return BadRequest(new { message = "E-mail já está em uso." });
+                }
+
                 if (string.IsNullOrEmpty(viewModel.Email) || string.IsNullOrEmpty(viewModel.Senha))
+                {
                     throw new ArgumentException("E-mail e senha são obrigatórios.");
+                }
 
                 var senhaEncriptada = BCrypt.Net.BCrypt.HashPassword(viewModel.Senha);
 
-                var newUsuario = new Models.Authorization.Usuario(viewModel.Nome,
+                var novoUsuario = new Models.Authorization.Usuario(viewModel.Nome,
                     viewModel.Email,
                     senhaEncriptada);
 
                 var token = Guid.NewGuid().ToString();
 
-                await _repository.InsertAsync(newUsuario, cancellation);
+                await _repository.InsertAsync(novoUsuario, cancellation);
 
                 return Ok(new { message = "Usuário registrado com sucesso." });
             }
