@@ -1,6 +1,6 @@
-﻿namespace FinanceApi.Models
+﻿namespace FinanceApi.Models.Authorization
 {
-    public class CadUsuario(string nome, string email, string senha) : BaseModel
+    public class Usuario(string nome, string email, string senha) : BaseModel
     {
         public string Nome { get; private set; } = nome;
         public string Email { get; private set; } = email;

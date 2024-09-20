@@ -22,7 +22,7 @@ builder.Services.AddScoped<ICadContaRepository, CadContaRepository>();
 builder.Services.AddScoped<IMovDespesaRepository, MovDespesaRepository>();
 builder.Services.AddScoped<IMovReceitaRepository, MovReceitaRepository>();
 builder.Services.AddScoped<ICadCartaoRepository, CadCartaoRepository>();
-builder.Services.AddScoped<ICadUsuarioRepository, CadUsuarioRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -34,7 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
         ValidIssuer = "batata.com",
         ValidAudience = "batata.com",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretKey"))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DImHfbdILAITTQgdM4bdQ7FhMPAsZb9xi+vjCs7ESD4=\r\n"))
     };
 });
 

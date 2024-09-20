@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinanceApi.Controllers.CadUsuario
+namespace FinanceApi.Controllers.Authorization.Usuario
 {
-    public class CadUsuarioViewModel
+    public class UsuarioViewModel
     {
         [Required]
         public string Nome { get; set; }
