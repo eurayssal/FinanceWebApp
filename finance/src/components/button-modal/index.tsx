@@ -4,7 +4,7 @@ import ButtonUi from '../button';
 import ModalUi from '../modal';
 
 const ButtonModalUi: React.FC<IButtonModalUiProps> = (props) => {
-    const { modal, model, onReload, ...buttonUiProps } = props;
+    const { modal, onReload, ...buttonUiProps } = props;
 
     const [open, setOpen] = React.useState(false);
 
@@ -16,13 +16,11 @@ const ButtonModalUi: React.FC<IButtonModalUiProps> = (props) => {
         setOpen(false)
     };
 
-    const modalProps = { model, onClose: handleClose, onReload }
+    const modalProps = { onClose: handleClose, onReload }
 
     return (<>
-        <ButtonUi {...buttonUiProps} />
-        {/* <ModalUi onClose={function (): void {
-            throw new Error('Function not implemented.');
-        } } /> */}
+        <ButtonUi {...buttonUiProps} onClick={handleOpen} />
+        <ModalUi content={modal} open={open} {...modalProps} />
     </>)
 }
 

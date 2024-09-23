@@ -2,8 +2,8 @@ import { PropsWithChildren } from "react";
 
 export interface IModalProps extends PropsWithChildren {
     title?: string;
-    content: React.FC<IModalContentProps>;
-    onClose: () => void;
+    content: React.FC<any>;
+    onClose?: () => void;
     open?: boolean;
 }
 
