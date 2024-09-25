@@ -1,10 +1,13 @@
 import React from "react";
-import IButtonUiProps from "./props";
+import IButtonUiProps, { IconProps } from "./props";
 import { ButtonJss } from "./jss";
 
+const Icon: React.FC<IconProps> = ({ icon: IconComponent }) => {
+    return <IconComponent />
+}
 
 const ButtonUi: React.FC<IButtonUiProps> = ({
-    text, onClick, variant
+    text, onClick, variant, icon
 }) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
@@ -13,6 +16,9 @@ const ButtonUi: React.FC<IButtonUiProps> = ({
     };
 
     return (<ButtonJss onClick={handleClick} variant={variant}>
+        <div >
+            {icon && <Icon icon={icon} />}
+        </div>
         {text}
     </ButtonJss>)
 }

@@ -31,8 +31,6 @@ namespace FinanceApi.Controllers.CadTag
         [HttpPost, Route("create")]
         public async Task<IActionResult> PostAsync(CadTagViewModel viewModel, CancellationToken cancellation)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
             var cadTag = new Models.CadTag(viewModel.Nome);
             await _repository.InsertAsync(cadTag, cancellation);

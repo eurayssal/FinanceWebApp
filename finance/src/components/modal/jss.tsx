@@ -6,7 +6,7 @@ export const DropModalJss = styled.div({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(255, 0, 0, 0.5)', /* Cor vermelha com transparência */
+    backgroundColor: 'rgba(0, 0, 0, 0.30)', /* Cor vermelha com transparência */
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
