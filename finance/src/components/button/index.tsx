@@ -1,8 +1,10 @@
 import React from "react";
 import IButtonUiProps from "./props";
+import { ButtonJss } from "./jss";
+
 
 const ButtonUi: React.FC<IButtonUiProps> = ({
-    text, onClick
+    text, onClick, variant
 }) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
@@ -10,9 +12,9 @@ const ButtonUi: React.FC<IButtonUiProps> = ({
         onClick && onClick(event);
     };
 
-    return (<button onClick={handleClick}>
+    return (<ButtonJss onClick={handleClick} variant={variant}>
         {text}
-    </button>)
+    </ButtonJss>)
 }
 
 export default ButtonUi;

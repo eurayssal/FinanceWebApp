@@ -30,9 +30,7 @@ const CadTagView = () => {
         {/* {tags.map((tag, index) => (
             <li key={index}>{tag.nome}</li>
         ))} */}
-        <ModalUi>
 
-        </ModalUi>
     </AppLayout>)
 }
 
