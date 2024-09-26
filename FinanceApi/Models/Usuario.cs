@@ -1,4 +1,4 @@
-﻿namespace FinanceApi.Models.Authorization
+﻿namespace FinanceApi.Models
 {
     public class Usuario(string nome, string email, string senha) : BaseModel
     {

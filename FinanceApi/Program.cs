@@ -1,14 +1,28 @@
 using FinanceApi.Context;
 using FinanceApi.Context.FinanceApi.Context;
+using FinanceApi.Infra.Encrypt;
 using FinanceApi.Repositories.Implementations;
 using FinanceApi.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+ConfigurationManager configuration = builder.Configuration;
 
-// Add services to the container.
+StringBuilder GetInitialMessage()
+{
+    StringBuilder builder = new();
+    return builder
+        .AppendLine(value: "Application: Finance  API - Ver. 1.0")
+        .AppendLine(value: "Development mode.");
+}
+JwtSettings GetJwtSettings()
+{
+    JwtSettings? jwtSettings = configuration.GetSection(key: "Authentication").Get<JwtSettings>();
+    return jwtSettings ?? throw new Exception(message: "JWT Secrets is empty");
+}
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,19 +38,29 @@ builder.Services.AddScoped<IMovReceitaRepository, MovReceitaRepository>();
 builder.Services.AddScoped<ICadCartaoRepository, CadCartaoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+JwtSettings jwtSettings = GetJwtSettings();
+jwtSettings.SecretKey = SecretKeyGenerator.GenerateSecretKey();
+
+builder.Services.AddSingleton(jwtSettings);
+builder.Services
+    .AddAuthentication(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = "batata.com",
-        ValidAudience = "batata.com",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DImHfbdILAITTQgdM4bdQ7FhMPAsZb9xi+vjCs7ESD4=\r\n"))
-    };
-});
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddCookie()
+    .AddJwtBearer(configureOptions: options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key: Encoding.UTF8.GetBytes(s: jwtSettings.SecretKey))
+        };
+    });
 
 var app = builder.Build();
 
@@ -54,10 +78,15 @@ app.UseCors(options =>
     options.AllowAnyMethod();
 });
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app
+  .UseRouting()
+  .UseHttpsRedirection()
+  .UseAuthentication()
+  .UseAuthorization()
+  .UseEndpoints(configure: end =>
+  {
+      end.MapDefaultControllerRoute();
+      end.MapControllers().RequireAuthorization(authorizeData: new AuthorizeAttribute());
+  });
 
 app.Run();

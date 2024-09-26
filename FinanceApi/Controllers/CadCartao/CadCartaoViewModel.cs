@@ -8,11 +8,12 @@ namespace FinanceApi.Controllers.CadCartao
         [Required(ErrorMessage = "O Nome é obrigatório.")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "DataVencimento é obrigatória.")]
+        [Required(ErrorMessage = "Data de vencimento é obrigatória.")]
         public DateTime DataVencimento { get; set; }
 
-        [Required(ErrorMessage = "DataFechamento é obrigatória.")]
+        [Required(ErrorMessage = "Data de fechamento é obrigatória.")]
         public DateTime DataFechamento { get; set; }
-        public decimal ValorFatura { get; set; }
+        [Required(ErrorMessage = "Limite é obrigatório.")]
+        public decimal Limite { get; set; }
     }
 }

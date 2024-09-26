@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinanceApi.Controllers.Authorization.Usuario
+namespace FinanceApi.Controllers.Authorization.ViewModels
 {
     public class UsuarioViewModel
     {

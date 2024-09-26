@@ -1,5 +1,5 @@
 ﻿using FinanceApi.Context.FinanceApi.Context;
-using FinanceApi.Models.Authorization;
+using FinanceApi.Models;
 using FinanceApi.Repositories.Interfaces;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;

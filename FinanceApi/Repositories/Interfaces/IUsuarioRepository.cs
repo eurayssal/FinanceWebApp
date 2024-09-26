@@ -1,5 +1,5 @@
 ﻿using FinanceApi.Context;
-using FinanceApi.Models.Authorization;
+using FinanceApi.Models;
 
 namespace FinanceApi.Repositories.Interfaces
 {

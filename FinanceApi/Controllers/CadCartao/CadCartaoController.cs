@@ -34,7 +34,7 @@ namespace FinanceApi.Controllers.CadCartao
             var cadCartao = new Models.CadCartao(nome: viewModel.Nome,
                dataFechamento: viewModel.DataFechamento,
                dataVencimento: viewModel.DataFechamento,
-               valorFatura: viewModel.ValorFatura);
+               valorFatura: viewModel.Limite);
 
             await _repository.InsertAsync(cadCartao, cancellation);
             return Ok(new { Message = "Cartão criado com sucesso." });
@@ -48,7 +48,7 @@ namespace FinanceApi.Controllers.CadCartao
             cadCartao.Update(nome: viewModel.Nome,
                dataFechamento: viewModel.DataFechamento,
                dataVencimento: viewModel.DataFechamento,
-               valorFatura: viewModel.ValorFatura);
+               valorFatura: viewModel.Limite);
 
             await _repository.UpdateAsync(cadCartao, cancellation);
             return Ok(new { Message = "Cartão criado com sucesso." });

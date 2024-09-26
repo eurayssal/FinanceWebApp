@@ -5,18 +5,11 @@ namespace FinanceApi.Controllers.MovReceita
 {
     [ApiController]
     [Route("api/receita")]
-    public class MovReceitaController : ControllerBase
+    public class MovReceitaController(IMovReceitaRepository repository, ICadTagRepository cadTagRepository, ICadContaRepository contaRepository) : ControllerBase
     {
-        private readonly IMovReceitaRepository _repository;
-        private readonly ICadTagRepository _tagRepository;
-        private readonly ICadContaRepository _contaRepository;
-
-        public MovReceitaController(IMovReceitaRepository repository, ICadTagRepository cadTagRepository, ICadContaRepository contaRepository)
-        {
-            _repository = repository;
-            _tagRepository = cadTagRepository;
-            _contaRepository = contaRepository;
-        }
+        private readonly IMovReceitaRepository _repository = repository;
+        private readonly ICadTagRepository _tagRepository = cadTagRepository;
+        private readonly ICadContaRepository _contaRepository = contaRepository;
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
@@ -29,7 +22,7 @@ namespace FinanceApi.Controllers.MovReceita
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellation)
         {
-            var movReceita = await _repository.GetAllAsync(cancellation);
+            var movReceita = await _repository.GetAsync(id, cancellation);
             return Ok(movReceita);
         }
 
