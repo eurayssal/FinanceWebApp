@@ -37,6 +37,7 @@ builder.Services.AddScoped<IMovDespesaRepository, MovDespesaRepository>();
 builder.Services.AddScoped<IMovReceitaRepository, MovReceitaRepository>();
 builder.Services.AddScoped<ICadCartaoRepository, CadCartaoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IMovTransferenciaRepository, MovTransferenciaRepository>();
 
 JwtSettings jwtSettings = GetJwtSettings();
 jwtSettings.SecretKey = SecretKeyGenerator.GenerateSecretKey();

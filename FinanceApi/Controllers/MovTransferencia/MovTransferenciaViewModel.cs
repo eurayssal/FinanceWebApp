@@ -10,6 +10,5 @@ namespace FinanceApi.Controllers.MovTransferencia
         public DateTime DataTransferencia { get; set; }
         public AutocompleteResponseOption<Guid>? ContaSaida { get; set; }
         public AutocompleteResponseOption<Guid>? ContaEntrada { get; set; }
-
     }
 }
