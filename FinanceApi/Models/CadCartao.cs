@@ -21,6 +21,11 @@
             ValorFatura = valorFatura;
         }
 
+        public void SomarValorFatura(decimal valor)
+        {
+            ValorFatura += valor;
+        }
+
         #endregion
     }
 }

@@ -10,12 +10,15 @@ namespace FinanceApi.Controllers.MovDespesa
         private readonly IMovDespesaRepository _repository;
         private readonly ICadTagRepository _tagRepository;
         private readonly ICadContaRepository _contaRepository;
+        private readonly ICadCartaoRepository _cartaoRepository;
 
-        public MovDespesaController(IMovDespesaRepository repository, ICadTagRepository tagRepository, ICadContaRepository contaRepository)
+        public MovDespesaController(IMovDespesaRepository repository, ICadTagRepository tagRepository,
+            ICadContaRepository contaRepository, ICadCartaoRepository cartaoRepository)
         {
             _repository = repository;
             _tagRepository = tagRepository;
             _contaRepository = contaRepository;
+            _cartaoRepository = cartaoRepository;
         }
 
         [HttpGet]
@@ -32,11 +35,13 @@ namespace FinanceApi.Controllers.MovDespesa
             return Ok(movDespesa);
         }
 
+        //TODO: Colocar regra de poder lançar uma despesa com cartão ou conta
         [HttpPost, Route("create")]
         public async Task<IActionResult> PostAsync(MovDespesaViewModel viewModel, CancellationToken cancellation)
         {
             Models.CadTag? cadTag = null;
             Models.CadConta? cadConta = null;
+            Models.CadCartao? cadCartao = null;
 
             if (viewModel.Tag != null && viewModel.Tag.Value != Guid.Empty)
             {
@@ -50,10 +55,18 @@ namespace FinanceApi.Controllers.MovDespesa
                 await _contaRepository.UpdateAsync(cadConta, cancellation);
             }
 
+            if (viewModel.Cartao != null && viewModel.Cartao.Value != Guid.Empty)
+            {
+                cadCartao = await _cartaoRepository.GetAsync(viewModel.Cartao.Value, cancellation);
+                cadCartao.SomarValorFatura(viewModel.Valor);
+                await _cartaoRepository.UpdateAsync(cadCartao, cancellation);
+            }
+
             var movDespesa = new Models.MovDespesa(viewModel.Descricao,
                 viewModel.Valor,
                 viewModel.DataLancamento,
                 cadConta: cadConta,
+                cadCartao: cadCartao,
                 cadTag: cadTag);
 
             await _repository.InsertAsync(movDespesa, cancellation);
