@@ -10,6 +10,8 @@
         public DateTime DataLancamento { get; private set; } = dataLancamento.Date;
         public CCadTag? Tag { get; private set; } = cadTag != null ? new CCadTag(cadTag) : null;
         public CCadConta? Conta { get; private set; } = cadConta != null ? new CCadConta(cadConta) : null;
+        //TODO: Colocar cartao
+        //TODO: Colocar usuario
 
         #endregion
 
