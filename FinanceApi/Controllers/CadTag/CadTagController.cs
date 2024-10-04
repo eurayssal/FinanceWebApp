@@ -1,11 +1,12 @@
 ﻿using FinanceApi.Repositories.Interfaces;
+using Infraestructure.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.CadTag
 {
     [ApiController]
     [Route("api/tag")]
-    public class CadTagController : ControllerBase
+    public class CadTagController : BaseController
     {
         private readonly ICadTagRepository _repository;
 
@@ -17,7 +18,7 @@ namespace FinanceApi.Controllers.CadTag
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
         {
-            var cadTags = await _repository.GetAllAsync(cancellation);
+            var cadTags = await _repository.GetAllAsync(GetUserId(), cancellation);
             return Ok(cadTags);
         }
 
@@ -32,7 +33,7 @@ namespace FinanceApi.Controllers.CadTag
         public async Task<IActionResult> PostAsync(CadTagViewModel viewModel, CancellationToken cancellation)
         {
 
-            var cadTag = new Models.CadTag(viewModel.Nome);
+            var cadTag = new Models.CadTag(GetUserId(), viewModel.Nome);
             await _repository.InsertAsync(cadTag, cancellation);
             return Ok(new { Message = "Tag criada com sucesso." });
         }

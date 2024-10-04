@@ -1,7 +1,7 @@
 ﻿namespace FinanceApi.Models
 {
-    public class MovDespesa(string descricao, decimal valor,
-        DateTime dataLancamento, CadConta? cadConta = null, CadCartao? cadCartao = null, CadTag? cadTag = null) : BaseModel
+    public class MovDespesa(string descricao, decimal valor, Guid userId, DateTime dataLancamento,
+        CadConta? cadConta = null, CadCartao? cadCartao = null, CadTag? cadTag = null) : BaseModel(userId)
     {
         #region Campos
 

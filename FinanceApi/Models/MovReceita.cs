@@ -1,6 +1,7 @@
 ﻿namespace FinanceApi.Models
 {
-    public class MovReceita(string descricao, decimal valor, DateTime dataLancamento, CadConta? cadConta = null, CadTag? cadTag = null) : BaseModel
+    public class MovReceita(string descricao, decimal valor, DateTime dataLancamento, Guid userId, CadConta? cadConta = null,
+        CadTag? cadTag = null) : BaseModel(userId)
     {
         public string Descricao { get; private set; } = descricao;
         public decimal Valor { get; private set; } = valor;

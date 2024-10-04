@@ -1,8 +1,9 @@
 ﻿namespace FinanceApi.Models
 {
-    public class CadTag(string nome) : BaseModel
+    public class CadTag(Guid userId, string nome) : BaseModel(userId)
     {
         #region Campos
+
         public string Nome { get; private set; } = nome;
 
         #endregion

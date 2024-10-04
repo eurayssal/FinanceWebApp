@@ -1,11 +1,12 @@
 ﻿using FinanceApi.Repositories.Interfaces;
+using Infraestructure.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.CadCartao
 {
     [ApiController]
     [Route("api/cartao")]
-    public class CadCartaoController : ControllerBase
+    public class CadCartaoController : BaseController
     {
         private readonly ICadCartaoRepository _repository;
 
@@ -17,7 +18,7 @@ namespace FinanceApi.Controllers.CadCartao
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
         {
-            var cadCartao = await _repository.GetAllAsync(cancellation);
+            var cadCartao = await _repository.GetAllAsync(GetUserId(), cancellation);
             return Ok(cadCartao);
         }
 
@@ -32,9 +33,10 @@ namespace FinanceApi.Controllers.CadCartao
         public async Task<IActionResult> PostAsync(CadCartaoViewModel viewModel, CancellationToken cancellation)
         {
             var cadCartao = new Models.CadCartao(nome: viewModel.Nome,
-               dataFechamento: viewModel.DataFechamento,
                dataVencimento: viewModel.DataFechamento,
-               valorFatura: viewModel.Limite);
+               dataFechamento: viewModel.DataFechamento,
+               valorFatura: viewModel.Limite,
+               GetUserId());
 
             await _repository.InsertAsync(cadCartao, cancellation);
             return Ok(new { Message = "Cartão criado com sucesso." });

@@ -1,6 +1,7 @@
 ﻿namespace FinanceApi.Models
 {
-    public class CadCartao(string nome, DateTime dataVencimento, DateTime dataFechamento, decimal valorFatura) : BaseModel
+    public class CadCartao(string nome, DateTime dataVencimento, DateTime dataFechamento,
+        decimal valorFatura, Guid userId) : BaseModel(userId)
     {
         #region Campos
 

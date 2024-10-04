@@ -23,9 +23,11 @@ namespace FinanceApi.Context
 
             public IMongoQueryable<T> Query => MongoCollection.AsQueryable();
 
-            public async Task<List<T>> GetAllAsync(CancellationToken cancellation)
+            public async Task<List<T>> GetAllAsync(Guid userId, CancellationToken cancellation)
             {
-                return await Query.ToListAsync(cancellation);
+                return await Query
+                    .Where(w => w.UserId == userId)
+                    .ToListAsync(cancellation);
             }
 
             public async Task<T> GetAsync(Guid id, CancellationToken cancellation)

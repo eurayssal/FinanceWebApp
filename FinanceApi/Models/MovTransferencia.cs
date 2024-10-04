@@ -1,6 +1,7 @@
 ﻿namespace FinanceApi.Models
 {
-    public class MovTransferencia(string descricao, decimal valor, string observacao, DateTime dataTransferencia, CadConta contaEntrada, CadConta contaSaida) : BaseModel
+    public class MovTransferencia(string descricao, decimal valor, string observacao, DateTime dataTransferencia,
+        CadConta contaEntrada, CadConta contaSaida, Guid userId) : BaseModel(userId)
     {
         public string Descricao { get; private set; } = descricao;
         public decimal Valor { get; private set; } = valor;

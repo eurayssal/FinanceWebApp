@@ -1,11 +1,12 @@
 ﻿using FinanceApi.Repositories.Interfaces;
+using Infraestructure.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.MovDespesa
 {
     [ApiController]
     [Route("api/despesa")]
-    public class MovDespesaController : ControllerBase
+    public class MovDespesaController : BaseController
     {
         private readonly IMovDespesaRepository _repository;
         private readonly ICadTagRepository _tagRepository;
@@ -24,7 +25,7 @@ namespace FinanceApi.Controllers.MovDespesa
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
         {
-            var movDespesa = await _repository.GetAllAsync(cancellation);
+            var movDespesa = await _repository.GetAllAsync(GetUserId(), cancellation);
             return Ok(movDespesa);
         }
 
@@ -64,6 +65,7 @@ namespace FinanceApi.Controllers.MovDespesa
 
             var movDespesa = new Models.MovDespesa(viewModel.Descricao,
                 viewModel.Valor,
+                GetUserId(),
                 viewModel.DataLancamento,
                 cadConta: cadConta,
                 cadCartao: cadCartao,

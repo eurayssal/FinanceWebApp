@@ -1,6 +1,6 @@
 ﻿namespace FinanceApi.Models
 {
-    public class CadConta(string nome, decimal saldo, bool status) : BaseModel
+    public class CadConta(string nome, decimal saldo, bool status, Guid userId) : BaseModel(userId)
     {
         #region Campos
 

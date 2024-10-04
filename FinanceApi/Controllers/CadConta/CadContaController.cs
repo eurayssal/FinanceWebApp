@@ -1,11 +1,12 @@
 ﻿using FinanceApi.Repositories.Interfaces;
+using Infraestructure.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.CadConta
 {
     [ApiController]
     [Route("api/conta")]
-    public class CadContaController : ControllerBase
+    public class CadContaController : BaseController
     {
         private readonly ICadContaRepository _repository;
 
@@ -17,7 +18,7 @@ namespace FinanceApi.Controllers.CadConta
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
         {
-            var cadConta = await _repository.GetAllAsync(cancellation);
+            var cadConta = await _repository.GetAllAsync(GetUserId(), cancellation);
             return Ok(cadConta);
         }
 
@@ -33,7 +34,8 @@ namespace FinanceApi.Controllers.CadConta
         {
             var cadConta = new Models.CadConta(nome: viewModel.Nome,
                 saldo: viewModel.Saldo,
-                status: viewModel.Status);
+                status: viewModel.Status,
+                GetUserId());
 
             await _repository.InsertAsync(cadConta, cancellation);
             return Ok(new { Message = "Conta criada com sucesso." });

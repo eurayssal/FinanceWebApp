@@ -1,11 +1,12 @@
 ﻿using FinanceApi.Repositories.Interfaces;
+using Infraestructure.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.MovTransferencia
 {
     [ApiController]
     [Route("api/transferencia")]
-    public class MovTransferenciaController(IMovTransferenciaRepository repository, ICadContaRepository contaRepository) : ControllerBase
+    public class MovTransferenciaController(IMovTransferenciaRepository repository, ICadContaRepository contaRepository) : BaseController
     {
         private readonly IMovTransferenciaRepository _repository = repository;
         private readonly ICadContaRepository _contaRepository = contaRepository;
@@ -13,7 +14,7 @@ namespace FinanceApi.Controllers.MovTransferencia
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
         {
-            var movTransferencia = await _repository.GetAllAsync(cancellation);
+            var movTransferencia = await _repository.GetAllAsync(GetUserId(), cancellation);
             return Ok(movTransferencia);
         }
 
@@ -44,7 +45,8 @@ namespace FinanceApi.Controllers.MovTransferencia
                 viewModel.Observacao,
                 viewModel.DataTransferencia,
                 contaEntrada: contaEntrada,
-                contaSaida: contaSaida
+                contaSaida: contaSaida,
+                GetUserId()
             );
 
             await _contaRepository.UpdateAsync(contaEntrada, cancellation);

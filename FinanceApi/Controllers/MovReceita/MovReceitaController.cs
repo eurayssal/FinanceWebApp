@@ -1,11 +1,13 @@
 ﻿using FinanceApi.Repositories.Interfaces;
+using Infraestructure.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.MovReceita
 {
     [ApiController]
     [Route("api/receita")]
-    public class MovReceitaController(IMovReceitaRepository repository, ICadTagRepository cadTagRepository, ICadContaRepository contaRepository) : ControllerBase
+    public class MovReceitaController(IMovReceitaRepository repository, ICadTagRepository cadTagRepository,
+        ICadContaRepository contaRepository) : BaseController
     {
         private readonly IMovReceitaRepository _repository = repository;
         private readonly ICadTagRepository _tagRepository = cadTagRepository;
@@ -14,7 +16,7 @@ namespace FinanceApi.Controllers.MovReceita
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellation)
         {
-            var movReceita = await _repository.GetAllAsync(cancellation);
+            var movReceita = await _repository.GetAllAsync(GetUserId(), cancellation);
             return Ok(movReceita);
         }
 
@@ -47,8 +49,9 @@ namespace FinanceApi.Controllers.MovReceita
             var movReceita = new Models.MovReceita(viewModel.Descricao,
                 viewModel.Valor,
                 viewModel.DataLancamento,
+                GetUserId(),
                 cadConta: cadConta,
-            cadTag: cadTag);
+                cadTag: cadTag);
 
             await _repository.InsertAsync(movReceita, cancellation);
             return Ok(new { Message = "Despesa criada com sucesso." });
