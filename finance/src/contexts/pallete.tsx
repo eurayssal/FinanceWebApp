@@ -3,6 +3,7 @@ import { ICurrentColorPallete } from "./props"
 
 export function GetLightMode(): ICurrentColorPallete {
     return ({
+        //Cores
         colorPrimary: {
             colorPrimaryBg: '#e6f4ff',
             colorPrimaryBgHover: '#bae0ff',
@@ -56,6 +57,7 @@ export function GetLightMode(): ICurrentColorPallete {
             colorLinkActive: '#0958d9'
         },
         colorText: {
+            colorTextBase: '#ffffff',
             colorText: 'rgba(0, 0, 0, 0.88)',
             colorTextSecondary: 'rgba(0, 0, 0, 0.65)',
             colorTextTertiary: 'rgba(0, 0, 0, 0.45)',
@@ -72,17 +74,26 @@ export function GetLightMode(): ICurrentColorPallete {
             colorFillQuaternary: 'rgba(0, 0, 0, 0.02)'
         },
         background: {
+            colorBgBase: '#000000',
             colorBgContainer: '#ffffff',
             colorBgElevated: '#ffffff',
             colorBgLayout: '#f5f5f5',
             colorBgSpotlight: 'rgba(0, 0, 0, 0.85)',
             colorBgMask: 'rgba(0, 0, 0, 0.45)'
+        },
+
+        //Shadows
+        shadow: {
+            defaultShadow: '0 2px 0 rgba(0, 0, 0, 0.02)',
+            dangerShadow: '0 2px 0 rgba(255, 38, 5, 0.06)',
+            primaryShadow: '0 2px 0 rgba(5, 145, 255, 0.1)'
         }
     })
 }
 
 export function GetDarkMode(): ICurrentColorPallete {
     return ({
+        //Cores
         colorPrimary: {
             colorPrimaryBg: '#111a2c',
             colorPrimaryBgHover: '#112545',
@@ -136,6 +147,7 @@ export function GetDarkMode(): ICurrentColorPallete {
             colorLinkActive: '#1554ad'
         },
         colorText: {
+            colorTextBase: '#ffffff',
             colorText: 'rgba(255, 255, 255, 0.85)',
             colorTextSecondary: 'rgba(255, 255, 255, 0.65)',
             colorTextTertiary: 'rgba(255, 255, 255, 0.45)',
@@ -152,11 +164,19 @@ export function GetDarkMode(): ICurrentColorPallete {
             colorFillQuaternary: 'rgba(255, 255, 255, 0)'
         },
         background: {
+            colorBgBase: '#000000',
             colorBgContainer: '#141414',
             colorBgElevated: '#1f1f1f',
             colorBgLayout: '#000000',
             colorBgSpotlight: '#424242',
             colorBgMask: 'rgba(0, 0, 0, 0.45)'
+        },
+
+        //Shadows
+        shadow: {
+            defaultShadow: '0 2px 0 rgba(0, 0, 0, 0.02)',
+            dangerShadow: '0 2px 0 rgba(255, 38, 5, 0.06)',
+            primaryShadow: '0 2px 0 rgba(5, 145, 255, 0.1)'
         }
     })
 }
