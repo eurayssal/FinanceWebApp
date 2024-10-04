@@ -9,8 +9,6 @@ export const ButtonJss = styled.button<IButtonUiProps>(({ variant }) => {
     let baseStyles = {
         display: 'flex',
         alignItems: 'center',
-        padding: '4px 15px',
-        borderRadius: '6px',
         fontSize: '14px',
         height: '32px',
     };
@@ -126,7 +124,6 @@ export const ButtonJss = styled.button<IButtonUiProps>(({ variant }) => {
             justifyContent: 'center',
             lineHeight: '22px',
             padding: '4px 15px',
-            boxShadow: theme.pallete.shadow.primaryShadow,
             //TODO: animação de clique
             ':active': {
                 color: theme.pallete.colorPrimary.colorPrimaryActive,
@@ -152,7 +149,7 @@ export const ButtonJss = styled.button<IButtonUiProps>(({ variant }) => {
             borderRadius: '50px',
             justifyContent: 'center',
             lineHeight: '22px',
-            padding: '4px 15px',
+            padding: '4px 8px',
             boxShadow: theme.pallete.shadow.primaryShadow,
             gap: 8,
             //TODO: animação de clique
