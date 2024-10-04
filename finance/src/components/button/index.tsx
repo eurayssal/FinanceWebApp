@@ -7,21 +7,21 @@ const Icon: React.FC<IconProps> = ({ icon: IconComponent }) => {
 }
 
 const ButtonUi: React.FC<IButtonUiProps> = ({
-    text, onClick, variant, icon, iconPosition = 'start'
+    text, onClick, variant = 'primary', icon, iconPosition = 'start'
 }) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         event.stopPropagation();
         onClick && onClick(event);
     };
-
-    return (<ButtonJss onClick={handleClick} variant={variant} hasIcon={!!icon} iconPosition={iconPosition}>
+    var variantProp = icon ? 'icon' : variant
+    return (<ButtonJss onClick={handleClick} variant={variantProp} hasIcon={!!icon} iconPosition={iconPosition}>
         {icon && iconPosition === "start" && <BoxButtonJss>
             <Icon icon={icon} />
         </BoxButtonJss>}
         {text}
         {icon && iconPosition === "end" && <BoxButtonJss>
-            icon && <Icon icon={icon} />
+            <Icon icon={icon} />
         </BoxButtonJss>}
     </ButtonJss>)
 }

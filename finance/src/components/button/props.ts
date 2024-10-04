@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
 
-export type buttonVariant = 'primary' | 'secondary' | 'white' | 'borderWhite' | 'text' | 'link' | 'linkWhite' | 'icon' | 'danger';
+export type buttonVariant = 'primary' | 'secondary' | 'danger' | 'text' | 'link' | 'icon';
 export type iconPosition = 'start' | 'end'
 export default interface IButtonUiProps {
     text?: string;

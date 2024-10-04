@@ -15,10 +15,15 @@ const ModalTeste: React.FC<IModalContentProps> = () => {
 
 const HomeView: React.FC = () => {
     return (<AppLayout>
-        <div>HomeView</div>
-        <ButtonModalUi variant='danger' modal={ModalTeste} text='dsadsa'></ButtonModalUi>
-        <ButtonUi text='Ola' variant='icon' icon={FaAngellist} iconPosition='start'></ButtonUi>
-        <ButtonUi text='Ola' variant='icon' icon={FaAngellist} iconPosition='end'></ButtonUi>
+        <div >HomeView
+
+            <ButtonModalUi variant='primary' modal={ModalTeste} text='primary'></ButtonModalUi>
+            <ButtonModalUi variant='secondary' modal={ModalTeste} text='secondary'></ButtonModalUi>
+            <ButtonModalUi variant='text' modal={ModalTeste} text='text'></ButtonModalUi>
+            <ButtonModalUi variant='link' modal={ModalTeste} text='link'></ButtonModalUi>
+            <ButtonUi text='icon' variant='icon' icon={FaAngellist} iconPosition='end'></ButtonUi>
+            <ButtonModalUi variant='danger' modal={ModalTeste} text='dsadsa'></ButtonModalUi>
+        </div>
     </AppLayout>)
 }
 
