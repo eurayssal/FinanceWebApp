@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ICurrentColorPallete } from "./pallete";
+import { ICurrentColorPallete } from "./props";
 
 interface IThemeContextProps {
     toggleDarkMode: () => void;

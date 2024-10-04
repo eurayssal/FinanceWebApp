@@ -10,12 +10,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(<BrowserRouter>
-  <ThemeProvider>
-    <Routes>
-      <Route path='/site/*' element={<AppRouteLazy />} />
-      <Route path='*' element={<AppRouteLazy />} />
-    </Routes>
-  </ThemeProvider>
+  <Routes>
+    <Route path='/site/*' element={<AppRouteLazy />} />
+    <Route path='*' element={<AppRouteLazy />} />
+  </Routes>
 </BrowserRouter>);
 
 reportWebVitals();

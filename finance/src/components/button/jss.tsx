@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
-import IButtonUiProps, { buttonVariant } from "./props";
+import IButtonUiProps from "./props";
+import { useContext } from "react";
+import ThemeContext from "../../contexts";
+import ThemeProvider from "../../contexts/provider";
 
 const baseStyles = {
     display: 'flex',
@@ -110,11 +113,16 @@ const variants = {
     },
 };
 
-export const ButtonJss = styled.button<IButtonUiProps>(({ variant, hasIcon }) => ({
-    ...baseStyles,
-    ...(variant ? variants[variant] : {}),
-    gap: hasIcon ? 4 : 0
-}));
+export const ButtonJss = styled.button<IButtonUiProps>(({ variant, hasIcon }) => {
+    const theme = useContext(ThemeContext);
+
+    return {
+        ...baseStyles,
+        ...(variant ? variants[variant] : {}),
+        gap: hasIcon ? 4 : 0,
+        color: theme.pallete.colorPrimary.colorPrimary
+    }
+});
 
 export const BoxButtonJss = styled.div(() => {
     return {
