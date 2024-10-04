@@ -1,13 +1,13 @@
 import React from "react";
 import IButtonUiProps, { IconProps } from "./props";
-import { ButtonJss } from "./jss";
+import { BoxButtonJss, ButtonJss } from "./jss";
 
 const Icon: React.FC<IconProps> = ({ icon: IconComponent }) => {
     return <IconComponent />
 }
 
 const ButtonUi: React.FC<IButtonUiProps> = ({
-    text, onClick, variant, icon
+    text, onClick, variant, icon, iconPosition = 'start'
 }) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
@@ -15,11 +15,14 @@ const ButtonUi: React.FC<IButtonUiProps> = ({
         onClick && onClick(event);
     };
 
-    return (<ButtonJss onClick={handleClick} variant={variant}>
-        <div >
-            {icon && <Icon icon={icon} />}
-        </div>
+    return (<ButtonJss onClick={handleClick} variant={variant} hasIcon={!!icon} iconPosition={iconPosition}>
+        {icon && iconPosition === "start" && <BoxButtonJss>
+            <Icon icon={icon} />
+        </BoxButtonJss>}
         {text}
+        {icon && iconPosition === "end" && <BoxButtonJss>
+            icon && <Icon icon={icon} />
+        </BoxButtonJss>}
     </ButtonJss>)
 }
 

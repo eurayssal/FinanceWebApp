@@ -17,7 +17,8 @@ const HomeView: React.FC = () => {
     return (<AppLayout>
         <div>HomeView</div>
         <ButtonModalUi variant='danger' modal={ModalTeste} text='dsadsa'></ButtonModalUi>
-        <ButtonUi text='Ola' variant='icon' icon={FaAngellist}></ButtonUi>
+        <ButtonUi text='Ola' variant='icon' icon={FaAngellist} iconPosition='start'></ButtonUi>
+        <ButtonUi text='Ola' variant='icon' icon={FaAngellist} iconPosition='end'></ButtonUi>
     </AppLayout>)
 }
 

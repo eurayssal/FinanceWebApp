@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { buttonVariant } from "./props";
+import IButtonUiProps, { buttonVariant } from "./props";
 
 const baseStyles = {
     display: 'flex',
@@ -110,7 +110,14 @@ const variants = {
     },
 };
 
-export const ButtonJss = styled.button<{ variant?: buttonVariant }>(({ variant }) => ({
+export const ButtonJss = styled.button<IButtonUiProps>(({ variant, hasIcon }) => ({
     ...baseStyles,
     ...(variant ? variants[variant] : {}),
+    gap: hasIcon ? 4 : 0
 }));
+
+export const BoxButtonJss = styled.div(() => {
+    return {
+
+    }
+})
