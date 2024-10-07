@@ -8,6 +8,7 @@ const ModalUi: React.FC<IModalProps> = ({
 
     const modalContentProps = { onClose };
     if (!open) return null;
+    //TODO: Colocar icone de info e sucesso.
 
     return (<jss.DropModalJss onClick={onClose}>
         <jss.ModalBoxJss onClick={(e) => e.stopPropagation()}>
