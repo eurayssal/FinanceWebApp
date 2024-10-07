@@ -11,16 +11,24 @@ const defaultStyle = {
     fontFamily: '"Poppins", sans-serif',
 }
 
-interface IThemeProviderProps extends PropsWithChildren {
-    toggle: boolean
-}
-
-const ThemeProvider: React.FC<IThemeProviderProps> = ({
-    children, toggle
+const ThemeProvider: React.FC<PropsWithChildren> = ({
+    children
 }) => {
+    const [isDarkMode, setIsDarkMode] = React.useState<boolean>(() => {
+        const savedTheme = localStorage.getItem("isDarkMode");
+        return savedTheme ? JSON.parse(savedTheme) : false;
+    });
+
+    React.useEffect(() => {
+        localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode));
+    }, [isDarkMode]);
+
+    function toggleDarkMode() {
+        setIsDarkMode((prevMode) => !prevMode);
+    }
 
     function handleGetGlobalStyles() {
-        const colors = toggle ? GetDarkMode() : GetLightMode();
+        const colors = isDarkMode ? GetDarkMode() : GetLightMode();
 
         return {
             '*': {
@@ -32,7 +40,6 @@ const ThemeProvider: React.FC<IThemeProviderProps> = ({
             }
         }
     }
-
 
     //#region Caso queira utilizar o tema do windows
 
@@ -58,12 +65,11 @@ const ThemeProvider: React.FC<IThemeProviderProps> = ({
     //#endregion
 
     return (<ThemeContext.Provider value={{
-        isDarkMode: toggle,
-        pallete: toggle ? GetDarkMode() : GetLightMode(),
-        toggleDarkMode: () => toggle
+        isDarkMode,
+        pallete: isDarkMode ? GetDarkMode() : GetLightMode(),
+        toggleDarkMode
     }}>
-        <Global styles={handleGetGlobalStyles} />
-
+        <Global styles={handleGetGlobalStyles()} />
         {children}
     </ThemeContext.Provider>)
 };

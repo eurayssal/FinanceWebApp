@@ -1,26 +1,19 @@
 import React, { PropsWithChildren } from 'react'
 import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, RigthConteiner, TopBar } from './jss'
 import ThemeProvider from '../../contexts/provider'
+import ToggleThemeButton from '../../contexts/toggleThemeButton';
 
 const AppLayout: React.FC<PropsWithChildren> = ({
     children
 }) => {
-    const [isDarkMode, setIsDarkMode] = React.useState(false);
-
-    function handleToggleDarkMode() {
-        setIsDarkMode((prevMode) => !prevMode);
-    }
-
     return (<AppLayoutJss>
-        <ThemeProvider toggle={isDarkMode}>
+        <ThemeProvider>
             <TopBar>
                 <RigthConteiner>
                     {/* <LogoImg onClick={toLandingPage} src={Logo} /> */}
                 </RigthConteiner>
                 <LeftConteiner>
-                    <button onClick={handleToggleDarkMode}>
-                        {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                    </button>
+                    <ToggleThemeButton />
                 </LeftConteiner>
             </TopBar>
 
