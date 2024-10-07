@@ -1,15 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PropsWithChildren } from "react"
 import { GetDarkMode, GetLightMode } from "./pallete";
 import ThemeContext from ".";
 import { Global } from "@emotion/react";
 
-const defaultStyle = {
-    margin: 0,
-    padding: 0,
-    outline: 0,
-    fontFamily: '"Poppins", sans-serif',
-}
 
 const ThemeProvider: React.FC<PropsWithChildren> = ({
     children
@@ -18,6 +12,14 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({
         const savedTheme = localStorage.getItem("isDarkMode");
         return savedTheme ? JSON.parse(savedTheme) : false;
     });
+
+
+    const defaultStyle = {
+        margin: 0,
+        padding: 0,
+        outline: 0,
+        fontFamily: '"Poppins", sans-serif',
+    }
 
     React.useEffect(() => {
         localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode));
@@ -34,6 +36,7 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({
             '*': {
                 ...defaultStyle,
                 'html, body': {
+                    color: colors.colorText.colorText,
                     height: '100%',
                     background: colors.background.colorBgLayout
                 }
