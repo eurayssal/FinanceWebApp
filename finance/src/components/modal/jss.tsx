@@ -24,6 +24,7 @@ export const ModalBoxJss = styled.div(function () {
     const theme = useContext(ThemeContext);
     return {
         display: 'flex',
+        flexDirection: 'column',
         backgroundColor: theme.pallete.background.colorBgElevated,
         padding: '20px',
         borderRadius: '8px',
@@ -36,6 +37,7 @@ export const ModalBoxJss = styled.div(function () {
 export const ModalHeader = styled.div(() => {
     return {
         display: 'flex',
+        width: '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
     };

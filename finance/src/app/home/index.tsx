@@ -17,12 +17,12 @@ const HomeView: React.FC = () => {
     return (<AppLayout>
         <div >HomeView
 
-            <ButtonModalUi variant='primary' modal={ModalTeste} text='primary'></ButtonModalUi>
-            <ButtonModalUi variant='secondary' modal={ModalTeste} text='secondary'></ButtonModalUi>
-            <ButtonModalUi variant='text' modal={ModalTeste} text='text'></ButtonModalUi>
-            <ButtonModalUi variant='link' modal={ModalTeste} text='link'></ButtonModalUi>
-            <ButtonUi variant='icon' icon={FaAngellist} iconPosition='end'></ButtonUi>
-            <ButtonModalUi variant='danger' modal={ModalTeste} text='dsadsa'></ButtonModalUi>
+            <ButtonModalUi variant='primary' modal={ModalTeste} text='primary' titleModal='Teste'></ButtonModalUi>
+            <ButtonModalUi variant='secondary' modal={ModalTeste} text='secondary' titleModal='Teste'></ButtonModalUi>
+            <ButtonModalUi variant='text' modal={ModalTeste} text='text' titleModal='Teste'></ButtonModalUi>
+            <ButtonModalUi variant='link' modal={ModalTeste} text='link' titleModal='Teste'></ButtonModalUi>
+            <ButtonUi variant='icon' icon={FaAngellist} iconPosition='end' ></ButtonUi>
+            <ButtonModalUi variant='danger' modal={ModalTeste} text='dsadsa' titleModal='Teste'></ButtonModalUi>
         </div>
     </AppLayout>)
 }

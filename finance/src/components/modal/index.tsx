@@ -14,7 +14,7 @@ const ModalUi: React.FC<IModalProps> = ({
         <jss.ModalBoxJss onClick={(e) => e.stopPropagation()}>
             <jss.ModalHeader>
                 <h3>{title}</h3>
-                <ButtonUi onClick={onClose} text='X' />
+                <ButtonUi onClick={onClose} variant='text' text='X' />
             </jss.ModalHeader>
             <jss.ModalContent>
                 <ModalContent {...modalContentProps} />
