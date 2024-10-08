@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 
 
-export const DropModalJss = styled.div(function () {
+export const DropModalJss = styled.div((props) => {
     const theme = useContext(ThemeContext);
 
     return {
@@ -17,10 +17,11 @@ export const DropModalJss = styled.div(function () {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'hidden'
     };
 });
 
-export const ModalBoxJss = styled.div(function () {
+export const ModalBoxJss = styled.div((props) => {
     const theme = useContext(ThemeContext);
     return {
         display: 'flex',
@@ -31,6 +32,7 @@ export const ModalBoxJss = styled.div(function () {
         maxWidth: '400px',
         width: '100%',
         position: 'relative',
+        overflowY: 'auto'
     };
 });
 

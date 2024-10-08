@@ -12,6 +12,7 @@ export const InputJss = styled.input(() => {
         borderColor: theme.pallete.colorBorder.colorBorder,
         borderRadius: 6,
         backgroundColor: theme.pallete.background.colorBgContainer,
+        color: theme.pallete.colorText.colorText,
 
         ':focus': {
             border: '1px solid',
@@ -31,7 +32,6 @@ export const ContainerJss = styled.div<IInputUiProps>(({
     return {
         display: 'flex',
         flexDirection: 'column',
-        position: 'relative',
         minWidth,
         width,
         maxWidth
