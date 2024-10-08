@@ -8,7 +8,6 @@ export const InputJss = styled.input(() => {
 
     return {
         padding: 4,
-        height: 30,
         border: '1px solid',
         borderColor: theme.pallete.colorBorder.colorBorder,
         borderRadius: 6,
