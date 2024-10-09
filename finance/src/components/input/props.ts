@@ -1,12 +1,6 @@
-import { InputHTMLAttributes } from "react";
+import { IInputCoreProps } from "./input.props-core";
 
-export interface IInputUiProps extends InputHTMLAttributes<HTMLInputElement> {
-    name: string;
-    label?: string;
-    required?: boolean;
-    minWidth?: number | string;
-    width?: number | string;
-    maxWidth?: number | string;
+export interface IInputProps extends IInputCoreProps {
     onBlur?: (event: React.FocusEvent<HTMLInputElement, Element>) => void;
     onFocus?: (event: React.FocusEvent<HTMLInputElement, Element>) => void;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useContext } from "react";
 import ThemeContext from "../../contexts";
-import { IInputUiProps } from "./props";
+import { IInputProps } from "./props";
 
 export const InputJss = styled.input(() => {
     const theme = useContext(ThemeContext);
@@ -26,7 +26,7 @@ export const InputJss = styled.input(() => {
     }
 })
 
-export const ContainerJss = styled.div<IInputUiProps>(({
+export const ContainerJss = styled.div<IInputProps>(({
     minWidth, width, maxWidth
 }) => {
     return {

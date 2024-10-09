@@ -4,7 +4,7 @@ interface IFormProps extends PropsWithChildren {
     onSubmitAsync: (event: React.FormEvent<HTMLFormElement>) => Promise<void>
 }
 
-const FormUi: React.FC<IFormProps> = (props) => {
+const Form: React.FC<IFormProps> = (props) => {
     const { children, onSubmitAsync } = props
 
     const handleSubmitAsync = (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,4 +20,4 @@ const FormUi: React.FC<IFormProps> = (props) => {
     </form>)
 };
 
-export default FormUi
+export default Form

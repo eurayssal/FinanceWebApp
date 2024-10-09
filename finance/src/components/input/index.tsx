@@ -1,13 +1,13 @@
 import React from 'react'
-import { ContainerJss, InputJss } from './jss'
 import Label from '../typography/label'
-import { IInputUiProps } from './props'
-import DisplayFlexUi from '../display/display-flex'
+import DisplayFlex from '../display/display-flex'
+import { IInputProps } from './props';
+import { ContainerJss, InputJss } from './jss';
 
-const InputUi: React.FC<IInputUiProps> = (props) => {
+const Input: React.FC<IInputProps> = (props) => {
     const { name, label, minWidth = '0%', width = '100%', required,
         maxWidth = '100%', onBlur, onFocus, onChange } = props;
-    //TODO: Implementar todas as props do IInputUiProps
+    //TODO: Implementar todas as props do IInputProps (criar validação para min e max)
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(event);
     };
@@ -24,13 +24,12 @@ const InputUi: React.FC<IInputUiProps> = (props) => {
     const containerProps = { minWidth, width, maxWidth };
 
     return (<ContainerJss name={`container-${id}`} {...containerProps}>
-        <DisplayFlexUi gap={8} alignItems='center'>
-            <Label>{label}</Label>
-            {required && <>*</>}
-        </DisplayFlexUi>
+        <DisplayFlex gap={8} alignItems='center'>
+            {label && <Label>{label} {required && <>*</>}</Label>}
+        </DisplayFlex>
         <InputJss {...props} key={id} name={name} onChange={handleChange}
             onFocus={handleFocus} onBlur={handleBlur} />
     </ContainerJss>)
 }
 
-export default InputUi
+export default Input
