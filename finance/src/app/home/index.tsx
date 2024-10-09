@@ -4,7 +4,8 @@ import ButtonModalUi from '../../components/button-modal';
 import { IModalContentProps } from '../../components/modal/props';
 import ButtonUi from '../../components/button';
 import { FaAngellist } from "react-icons/fa6";
-import InputUi from '../../components/input';
+import Input from '../../components/input';
+import InputMoney from '../../components/input-money';
 
 const ModalTeste: React.FC<IModalContentProps> = () => {
     return (
@@ -24,8 +25,8 @@ const HomeView: React.FC = () => {
             <ButtonModalUi variant='link' modal={ModalTeste} text='link' titleModal='Teste'></ButtonModalUi>
             <ButtonUi variant='icon' icon={FaAngellist} iconPosition='end' ></ButtonUi>
             <ButtonModalUi variant='danger' modal={ModalTeste} text='dsadsa' titleModal='Teste'></ButtonModalUi>
-
-            <InputUi name={'sas'} label='Ola' required />
+            <Input name={'sas'} label='Ola' required />
+            <InputMoney label='AAA' name={'aaa'} required />
         </div>
     </AppLayout>)
 }
