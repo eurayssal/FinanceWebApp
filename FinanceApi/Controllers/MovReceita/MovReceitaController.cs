@@ -1,9 +1,11 @@
 ﻿using FinanceApi.Repositories.Interfaces;
 using Infraestructure.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.MovReceita
 {
+    [Authorize]
     [ApiController]
     [Route("api/receita")]
     public class MovReceitaController(IMovReceitaRepository repository, ICadTagRepository cadTagRepository,

@@ -8,6 +8,7 @@ export interface IDisplayFlexProps extends PropsWithChildren {
     flexWrap?: flexWrapType,
     gap?: number,
     width?: string | number,
+    height?: string | number,
 }
 
 export interface IDisplayGridProps extends PropsWithChildren {

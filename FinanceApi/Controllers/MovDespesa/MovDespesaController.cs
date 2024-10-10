@@ -1,9 +1,11 @@
 ﻿using FinanceApi.Repositories.Interfaces;
 using Infraestructure.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.MovDespesa
 {
+    [Authorize]
     [ApiController]
     [Route("api/despesa")]
     public class MovDespesaController : BaseController

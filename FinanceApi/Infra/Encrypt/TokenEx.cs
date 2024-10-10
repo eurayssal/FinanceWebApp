@@ -19,8 +19,7 @@ namespace FinanceApi.Infra.Encrypt
                 [
                     new Claim(type: ClaimTypes.NameIdentifier, value: model.Id.ToString()),
                 ]),
-                //Expires = DateTime.UtcNow.AddMinutes(value: jwtSettings.AccessTokenExpirationMinutes),
-                Expires = DateTime.UtcNow.AddYears(1),
+                Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(key: new SymmetricSecurityKey(key), algorithm: SecurityAlgorithms.HmacSha256Signature)
             };
 

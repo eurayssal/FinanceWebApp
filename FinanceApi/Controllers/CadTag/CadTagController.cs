@@ -1,9 +1,11 @@
 ﻿using FinanceApi.Repositories.Interfaces;
 using Infraestructure.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.CadTag
 {
+    [Authorize]
     [ApiController]
     [Route("api/tag")]
     public class CadTagController : BaseController

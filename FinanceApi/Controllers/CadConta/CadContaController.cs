@@ -1,9 +1,11 @@
 ﻿using FinanceApi.Repositories.Interfaces;
 using Infraestructure.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.CadConta
 {
+    [Authorize]
     [ApiController]
     [Route("api/conta")]
     public class CadContaController : BaseController

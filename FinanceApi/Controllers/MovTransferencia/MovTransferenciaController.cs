@@ -1,9 +1,11 @@
 ﻿using FinanceApi.Repositories.Interfaces;
 using Infraestructure.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApi.Controllers.MovTransferencia
 {
+    [Authorize]
     [ApiController]
     [Route("api/transferencia")]
     public class MovTransferenciaController(IMovTransferenciaRepository repository, ICadContaRepository contaRepository) : BaseController
