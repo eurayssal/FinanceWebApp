@@ -1,36 +1,45 @@
-import React, { useContext, useState } from 'react'
-import Input from '../../components/input'
-import SiteLayout from '../_layout'
-import Form from '../../components/form'
-import hookApi from '../../hooks/api'
-import { ILoginProps } from './props'
-import { FormContext, HelperModel } from '../../components/form/model'
-import Button from '../../components/button'
+import React, { useState } from 'react';
+import SiteLayout from '../_layout';
+import Form from '../../components/form';
+import { useNavigate } from 'react-router-dom';
+import hookApi from '../../hooks/api';
+import Input from '../../components/input';
+import Button from '../../components/button';
 
 const LoginView: React.FC = () => {
     const api = hookApi();
+    const navigate = useNavigate(); // Para redirecionar após o login
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
 
-    const context = useContext(FormContext)
+    // A função de login será usada dentro do contexto do Form
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+        try {
+            const response = await api.post('/api/usuario/login', {
+                email,
+                senha,
+            });
 
-    React.useEffect(() => {
-        var x = context.getModel('email')
-        console.log('x', x)
-    }, []);
-    const handleSubmit = async (event: React.FormEvent) => {
-        const response = await api.post('api/usuario/login',);
-        // Salva o token no localStorage (ou outro método de sua escolha)
-        localStorage.setItem('token', response.data.AccessToken);
-        alert('Login realizado com sucesso!');
-    }
-
+            localStorage.setItem('token', response.data.accessToken);
+            navigate('/app/home'); // Redireciona para o home após o login
+        } catch (err) {
+            setError('Login falhou. Verifique suas credenciais.');
+        }
+    };
 
     return (<SiteLayout>
-        <Form onSubmitAsync={handleSubmit}>
-            <Input name={'email'} label='E-mail' />
-            <Input name={'senha'} label='Senha' type='password' />
-            <Button text='Entrar' type='submit' />
-        </Form>
-    </SiteLayout>)
-}
+        <Form onSubmitAsync={handleLogin}>
+            <Input name='email' type="email" value={email}
+                onChange={(e) => setEmail(e.target.value)} required />
+            <Input name='senha' type="password" value={senha}
+                onChange={(e) => setSenha(e.target.value)} required />
 
-export default LoginView
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <Button text='Entrar' type='submit' />
+            <button type="submit">Entrar</button>
+        </Form>
+    </SiteLayout>);
+};
+
+export default LoginView;

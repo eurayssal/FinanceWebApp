@@ -7,15 +7,10 @@ const Icon: React.FC<IconProps> = ({ icon: IconComponent }) => {
 }
 
 const Button: React.FC<IButtonUiProps> = ({
-    text, onClick, variant = 'primary', icon, iconPosition = 'start'
+    text, variant = 'primary', type = 'submit', icon, iconPosition = 'start'
 }) => {
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.preventDefault();
-        event.stopPropagation();
-        onClick && onClick(event);
-    };
     var variantProp = icon ? 'icon' : variant
-    return (<ButtonJss onClick={handleClick} variant={variantProp} hasIcon={!!icon} iconPosition={iconPosition}>
+    return (<ButtonJss variant={variantProp} hasIcon={!!icon} iconPosition={iconPosition} type={type}>
         {icon && iconPosition === "start" && <BoxButtonJss>
             <Icon icon={icon} />
         </BoxButtonJss>}
