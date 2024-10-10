@@ -6,16 +6,20 @@ import hookApi from '../../hooks/api';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import DisplayFlex from '../../components/display/display-flex';
+import { LogoJss, ParagraphJss, SectionJss, TitleJss } from './jss';
+import LogoColorida from '../../assets/logo-colorida.svg';
 
 const LoginView: React.FC = () => {
     const api = hookApi();
-    const navigate = useNavigate(); // Para redirecionar após o login
+
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
 
     // A função de login será usada dentro do contexto do Form
-    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleLogin = async () => {
         try {
             const response = await api.post('/api/usuario/login', {
                 email,
@@ -23,26 +27,41 @@ const LoginView: React.FC = () => {
             });
 
             localStorage.setItem('token', response.data.accessToken);
-            navigate('/app/home'); // Redireciona para o home após o login
+            navigate('/app/home');
         } catch (err) {
             setError('Login falhou. Verifique suas credenciais.');
         }
     };
 
     return (<SiteLayout>
-        <DisplayFlex height='100vh' justifyContent='center' alignItems='center'>
-            <Form onSubmitAsync={handleLogin}>
-                <DisplayFlex flexDirection='column' gap={16}>
-                    <Input label='E-mail' name='email' type="email" value={email}
-                        onChange={(e) => setEmail(e.target.value)} required />
-                    <Input label='Senha' name='senha' type="password" value={senha}
-                        onChange={(e) => setSenha(e.target.value)} required />
+        <DisplayFlex height='90vh' justifyContent='center' alignItems='center' flexDirection='column'>
+            <SectionJss>
+                <Form onSubmitAsync={handleLogin}>
+                    <DisplayFlex flexDirection='column' gap={32} alignItems='center'>
 
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
-                    <Button text='Entrar' type='submit' />
-                    <Button text='Cadastrar' variant='link' onClick={() => navigate('/site/cadastrar')} />
-                </DisplayFlex>
-            </Form>
+                        <DisplayFlex flexDirection='column' alignItems='center' gap={32}>
+                            <LogoJss src={LogoColorida} onClick={() => navigate('/')} />
+                            <TitleJss>Acesse sua conta</TitleJss>
+                        </DisplayFlex>
+
+                        <DisplayFlex flexDirection='column' gap={16}>
+                            <Input label='Seu e-mail' name='email' type="email" value={email} minWidth={350} maxWidth={350}
+                                onChange={(e) => setEmail(e.target.value)} required />
+                            <Input label='Sua senha' name='senha' type="password" value={senha} minWidth={350} maxWidth={350}
+                                onChange={(e) => setSenha(e.target.value)} required />
+                            {error && <p style={{ color: 'red' }}>{error}</p>}
+                        </DisplayFlex>
+
+                        <DisplayFlex flexDirection='column' gap={16}>
+                            <Button text='Entrar' type='submit' />
+                            <DisplayFlex alignItems='center'>
+                                <ParagraphJss>Ainda não possui conta?</ParagraphJss>
+                                <Button text='Faça o cadastro!' variant='link' onClick={() => navigate('/site/cadastrar')} />
+                            </DisplayFlex>
+                        </DisplayFlex>
+                    </DisplayFlex>
+                </Form>
+            </SectionJss>
         </DisplayFlex>
 
     </SiteLayout>);

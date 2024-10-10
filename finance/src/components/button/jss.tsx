@@ -9,7 +9,7 @@ export const ButtonJss = styled.button<IButtonUiProps>(({ variant }) => {
     let baseStyles = {
         display: 'flex',
         alignItems: 'center',
-        fontSize: '14px',
+        fontSize: '16px',
         height: '32px',
     };
 

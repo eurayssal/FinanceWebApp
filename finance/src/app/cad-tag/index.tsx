@@ -1,7 +1,6 @@
 import React from 'react';
 import hookApi from '../../hooks/api'
 import AppLayout from '../_layout'
-import ModalUi from '../../components/modal';
 
 export interface ICadConta {
     id: string;
