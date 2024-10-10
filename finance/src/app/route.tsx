@@ -5,7 +5,6 @@ import CadTagView from './cad-tag';
 import useAuth from '../hooks/auth';
 
 const AppRoute: React.FC = () => {
-    const token = localStorage.getItem('token'); // Verifica o token
     useAuth();
 
     return (<Routes>

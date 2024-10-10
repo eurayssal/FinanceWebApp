@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import hookApi from '../../hooks/api'
 import AppLayout from '../_layout'
 
@@ -21,7 +21,7 @@ const CadTagView = () => {
         }
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         getTags();
     }, []);
 

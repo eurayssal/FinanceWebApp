@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import { PropsWithChildren } from "react"
 import { GetDarkMode, GetLightMode } from "./pallete";
 import ThemeContext from ".";
@@ -21,7 +21,7 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({
         fontFamily: '"Poppins", sans-serif',
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode));
     }, [isDarkMode]);
 

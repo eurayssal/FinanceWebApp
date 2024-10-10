@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ThemeProvider from './contexts/provider';
 
 const SiteRouteLazy = React.lazy(() => import('./site/route'));
 const AppRouteLazy = React.lazy(() => import('./app/route'))

@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Label from '../typography/label'
 import DisplayFlex from '../display/display-flex'
 import { IInputProps } from './props';
 import { ContainerJss, InputJss } from './jss';
+import * as mold from '../../utils/mold/mold';
 
 const Input: React.FC<IInputProps> = (props) => {
-    const { name, label, minWidth = '0%', width = '100%', required,
+    const { name, label, minWidth = '0%', width = '100%', required, maxLength, value,
         maxWidth = '100%', onBlur, onFocus, onChange } = props;
     //TODO: Implementar todas as props do IInputProps (criar validação para min e max)
+    const [error, setError] = useState<string | null>(null);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(event);
     };
@@ -20,6 +23,19 @@ const Input: React.FC<IInputProps> = (props) => {
         onFocus && onFocus(event);
     };
 
+    //Possivel validação de min e max lenght
+    // const validate = (value: string) => {
+    //     if (maxLength && !mold.maxLength(value, maxLength)) {
+    //         setError('Num deu')
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     if (value) {
+    //         validate(value)
+    //     }
+    // }, []);
+
     const id = `fc-${name}`;
     const containerProps = { minWidth, width, maxWidth };
 
@@ -29,6 +45,8 @@ const Input: React.FC<IInputProps> = (props) => {
         </DisplayFlex>
         <InputJss {...props} key={id} name={name} onChange={handleChange}
             onFocus={handleFocus} onBlur={handleBlur} />
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+
     </ContainerJss>)
 }
 

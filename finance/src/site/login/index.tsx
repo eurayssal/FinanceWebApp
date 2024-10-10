@@ -45,7 +45,7 @@ const LoginView: React.FC = () => {
                         </DisplayFlex>
 
                         <DisplayFlex flexDirection='column' gap={16}>
-                            <Input label='Seu e-mail' name='email' type="email" value={email} minWidth={350} maxWidth={350}
+                            <Input maxLength={2} label='Seu e-mail' name='email' type="email" value={email} minWidth={350} maxWidth={350}
                                 onChange={(e) => setEmail(e.target.value)} required />
                             <Input label='Sua senha' name='senha' type="password" value={senha} minWidth={350} maxWidth={350}
                                 onChange={(e) => setSenha(e.target.value)} required />
