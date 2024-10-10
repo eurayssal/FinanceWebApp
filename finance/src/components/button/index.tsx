@@ -6,7 +6,7 @@ const Icon: React.FC<IconProps> = ({ icon: IconComponent }) => {
     return <IconComponent />
 }
 
-const ButtonUi: React.FC<IButtonUiProps> = ({
+const Button: React.FC<IButtonUiProps> = ({
     text, onClick, variant = 'primary', icon, iconPosition = 'start'
 }) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -26,4 +26,4 @@ const ButtonUi: React.FC<IButtonUiProps> = ({
     </ButtonJss>)
 }
 
-export default ButtonUi;
+export default Button;

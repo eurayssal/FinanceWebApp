@@ -1,6 +1,6 @@
 import React from 'react'
 import * as jss from './jss';
-import ButtonUi from '../button';
+import Button from '../button';
 import { IModalProps } from './props';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 
@@ -16,7 +16,7 @@ const ModalUi: React.FC<IModalProps> = ({
         <jss.ModalBoxJss onClick={(e) => e.stopPropagation()}>
             <jss.ModalHeader>
                 <h3>{title}</h3>
-                <ButtonUi onClick={onClose} variant='text' text='X' />
+                <Button onClick={onClose} variant='text' text='X' />
             </jss.ModalHeader>
             <jss.ModalContent>
                 <ModalContent {...modalContentProps} />

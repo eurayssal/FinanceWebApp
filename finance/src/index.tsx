@@ -4,6 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ThemeProvider from './contexts/provider';
 
+const SiteRouteLazy = React.lazy(() => import('./site/route'));
 const AppRouteLazy = React.lazy(() => import('./app/route'))
 
 const root = ReactDOM.createRoot(
@@ -11,8 +12,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(<BrowserRouter>
   <Routes>
-    <Route path='/site/*' element={<AppRouteLazy />} />
-    <Route path='*' element={<AppRouteLazy />} />
+    <Route path='/site/*' element={<SiteRouteLazy />} />
+    <Route path='/app/*' element={<AppRouteLazy />} />
+    <Route path='*' element={<SiteRouteLazy />} />
   </Routes>
 </BrowserRouter>);
 

@@ -2,7 +2,7 @@ import { IconType } from "react-icons";
 
 export type buttonVariant = 'primary' | 'secondary' | 'danger' | 'text' | 'link' | 'icon';
 export type iconPosition = 'start' | 'end'
-export default interface IButtonUiProps {
+export default interface IButtonUiProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     text?: string;
     icon?: IconType;
     variant?: buttonVariant;
