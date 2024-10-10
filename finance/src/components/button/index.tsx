@@ -7,10 +7,10 @@ const Icon: React.FC<IconProps> = ({ icon: IconComponent }) => {
 }
 
 const Button: React.FC<IButtonUiProps> = ({
-    text, variant = 'primary', type = 'submit', icon, iconPosition = 'start'
+    text, onClick, variant = 'primary', type = 'submit', icon, iconPosition = 'start'
 }) => {
     var variantProp = icon ? 'icon' : variant
-    return (<ButtonJss variant={variantProp} hasIcon={!!icon} iconPosition={iconPosition} type={type}>
+    return (<ButtonJss onClick={onClick} variant={variantProp} hasIcon={!!icon} iconPosition={iconPosition} type={type}>
         {icon && iconPosition === "start" && <BoxButtonJss>
             <Icon icon={icon} />
         </BoxButtonJss>}
