@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import hookApi from '../../hooks/api';
 import Input from '../../components/input';
 import Button from '../../components/button';
+import DisplayFlex from '../../components/display/display-flex';
 
 const LoginView: React.FC = () => {
     const api = hookApi();
@@ -29,16 +30,21 @@ const LoginView: React.FC = () => {
     };
 
     return (<SiteLayout>
-        <Form onSubmitAsync={handleLogin}>
-            <Input name='email' type="email" value={email}
-                onChange={(e) => setEmail(e.target.value)} required />
-            <Input name='senha' type="password" value={senha}
-                onChange={(e) => setSenha(e.target.value)} required />
+        <DisplayFlex height='100vh' justifyContent='center' alignItems='center'>
+            <Form onSubmitAsync={handleLogin}>
+                <DisplayFlex flexDirection='column' gap={16}>
+                    <Input label='E-mail' name='email' type="email" value={email}
+                        onChange={(e) => setEmail(e.target.value)} required />
+                    <Input label='Senha' name='senha' type="password" value={senha}
+                        onChange={(e) => setSenha(e.target.value)} required />
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <Button text='Entrar' type='submit' />
-            <button type="submit">Entrar</button>
-        </Form>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <Button text='Entrar' type='submit' />
+                    <Button text='Cadastrar' variant='link' onClick={() => navigate('/site/cadastrar')} />
+                </DisplayFlex>
+            </Form>
+        </DisplayFlex>
+
     </SiteLayout>);
 };
 

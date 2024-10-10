@@ -1,12 +1,12 @@
 import React from 'react'
-import Button from '../components/button'
-import SiteLayout from './_layout'
+import Button from '../../components/button'
+import SiteLayout from '../_layout'
 import { useNavigate } from 'react-router-dom';
 
 const LandingPageView: React.FC = () => {
     const navigate = useNavigate();
 
-    const handleClick = () => navigate('/entrar');
+    const handleClick = () => navigate('/site/entrar');
 
     return (<SiteLayout>
         <Button text='Entrar' onClick={handleClick} />

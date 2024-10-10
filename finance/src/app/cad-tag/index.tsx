@@ -27,9 +27,9 @@ const CadTagView = () => {
     }, []);
 
     return (<AppLayout>
-        {/* {tags.map((tag, index) => (
+        {tags.map((tag, index) => (
             <li key={index}>{tag.nome}</li>
-        ))} */}
+        ))}
 
     </AppLayout>)
 }

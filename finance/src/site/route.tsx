@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import LandingPageView from './lp';
+import LandingPageView from './landing-page';
 import LoginView from './login';
 
 const SiteRoute: React.FC = () => {

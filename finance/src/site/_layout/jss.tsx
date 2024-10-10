@@ -9,22 +9,7 @@ export const AppLayoutJss = styled.div({
     flexDirection: 'column',
 });
 
-// TopBar
-
-export const TopBar = styled.div(() => {
-    const theme = useContext(ThemeContext);
-    return {
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: "space-around",
-        backgroundColor: theme.pallete.background.colorBgContainer,
-        borderBottom: `1px solid ${theme.pallete.colorBorder.colorBorderSecondary}`
-    }
-});
-
-
+//Footer
 export const Footer = styled.div(() => {
     const theme = useContext(ThemeContext);
     return {
@@ -37,26 +22,3 @@ export const Footer = styled.div(() => {
         justifyContent: 'center'
     }
 });
-
-export const LeftConteiner = styled.div({
-    display: 'flex',
-    paddingTop: '24px',
-    paddingBottom: '24px',
-    gap: '16px'
-});
-
-export const CenterContainer = styled.div({
-});
-
-export const RigthConteiner = styled.div({
-});
-
-
-export const LayoutContainerJss = styled.div({
-    margin: '16px'
-})
-
-export const LogoImg = styled.img({
-    maxWidth: '150px',
-    cursor: 'pointer'
-})
