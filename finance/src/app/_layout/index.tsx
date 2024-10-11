@@ -1,9 +1,10 @@
 import React, { PropsWithChildren } from 'react'
-import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, RigthConteiner, TopBar } from './jss'
+import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, LogoJss, RigthConteiner, TopBar } from './jss'
 import ThemeProvider from '../../contexts/provider'
 import ToggleThemeButton from '../../contexts/toggleThemeButton';
 import Button from '../../components/button';
 import { useNavigate } from 'react-router-dom';
+import LogoColorida from '../../assets/logo-colorida.svg';
 
 const AppLayout: React.FC<PropsWithChildren> = ({
     children
@@ -19,11 +20,11 @@ const AppLayout: React.FC<PropsWithChildren> = ({
         <ThemeProvider>
             <TopBar>
                 <RigthConteiner>
-                    {/* <LogoImg onClick={toLandingPage} src={Logo} /> */}
-                    <Button text='Sair' variant='danger' onClick={handleLogout} />
+                    {/* <LogoJss src={LogoColorida} /> */}
                 </RigthConteiner>
                 <LeftConteiner>
                     <ToggleThemeButton />
+                    <Button text='Sair' variant='danger' title='Sair' onClick={handleLogout} />
                 </LeftConteiner>
             </TopBar>
 

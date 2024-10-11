@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import HomeView from './home';
-import CadTagView from './cad-tag';
+import HomeView from './pages/home';
+import CadTagView from './pages/cad-tag';
 import useAuth from '../hooks/auth';
 
 const AppRoute: React.FC = () => {

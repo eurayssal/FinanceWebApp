@@ -56,7 +56,7 @@ export const LayoutContainerJss = styled.div({
     margin: '16px'
 })
 
-export const LogoImg = styled.img({
+export const LogoJss = styled.img({
     maxWidth: '150px',
     cursor: 'pointer'
 })

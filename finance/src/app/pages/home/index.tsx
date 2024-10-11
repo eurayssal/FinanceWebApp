@@ -1,8 +1,9 @@
 import React from 'react'
-import AppLayout from '../../app/_layout';
+import AppLayout from '../../_layout';
 
 const HomeView: React.FC = () => {
     return (<AppLayout>
+
     </AppLayout>)
 }
 

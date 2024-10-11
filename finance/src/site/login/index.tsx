@@ -40,12 +40,12 @@ const LoginView: React.FC = () => {
                     <DisplayFlex flexDirection='column' gap={32} alignItems='center'>
 
                         <DisplayFlex flexDirection='column' alignItems='center' gap={32}>
-                            <LogoJss src={LogoColorida} onClick={() => navigate('/')} />
+                            {/* <LogoJss src={LogoColorida} onClick={() => navigate('/')} /> */}
                             <TitleJss>Acesse sua conta</TitleJss>
                         </DisplayFlex>
 
                         <DisplayFlex flexDirection='column' gap={16}>
-                            <Input maxLength={2} label='Seu e-mail' name='email' type="email" value={email} minWidth={350} maxWidth={350}
+                            <Input label='Seu e-mail' name='email' type="email" value={email} minWidth={350} maxWidth={350}
                                 onChange={(e) => setEmail(e.target.value)} required />
                             <Input label='Sua senha' name='senha' type="password" value={senha} minWidth={350} maxWidth={350}
                                 onChange={(e) => setSenha(e.target.value)} required />

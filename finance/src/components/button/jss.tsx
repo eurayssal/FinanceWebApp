@@ -174,5 +174,8 @@ export const ButtonJss = styled.button<IButtonUiProps>(({ variant }) => {
 });
 
 export const BoxButtonJss = styled.div(() => {
-    return {}
+    return {
+        width: 16,
+        height: 16
+    }
 })

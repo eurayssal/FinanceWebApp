@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
-import hookApi from '../../hooks/api'
-import AppLayout from '../_layout'
+import hookApi from '../../../hooks/api'
+import AppLayout from '../../_layout'
+import ButtonModal from '../../../components/button-modal';
+import ModalAddTag from './modal';
+import { FaPlus } from "react-icons/fa6";
 
 export interface ICadConta {
     id: string;
@@ -29,6 +32,8 @@ const CadTagView = () => {
         {tags.map((tag, index) => (
             <li key={index}>{tag.nome}</li>
         ))}
+        <ButtonModal modal={ModalAddTag} titleModal='Adicionar tag'
+            text='Acicionar' icon={FaPlus} />
 
     </AppLayout>)
 }
