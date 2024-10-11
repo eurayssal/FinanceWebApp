@@ -18,7 +18,9 @@ export interface ICadTag {
     nome: string;
 }
 
-const ModalAddTag: React.FC<IModalContentProps> = (props) => {
+const ModalAddTag: React.FC<IModalContentProps> = ({
+    onClose
+}) => {
     const api = hookApi();
 
     const [newTag, setNewTag] = useState<ICadTag>(dataTag)
@@ -27,7 +29,7 @@ const ModalAddTag: React.FC<IModalContentProps> = (props) => {
         try {
             await api.post('/api/tag/create', newTag);
             setNewTag(dataTag);
-
+            onClose()
         } catch (error) {
             console.error('Erro ao adicionar conta: ', error);
         }

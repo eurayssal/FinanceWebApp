@@ -4,8 +4,10 @@ import AppLayout from '../../_layout'
 import ButtonModal from '../../../components/button-modal';
 import ModalAddTag from './modal';
 import { FaPlus } from "react-icons/fa6";
+import DisplayFlex from '../../../components/display/display-flex';
+import Button from '../../../components/button';
 
-export interface ICadConta {
+export interface ICadTag {
     id: string;
     nome: string;
 }
@@ -13,7 +15,7 @@ export interface ICadConta {
 const CadTagView = () => {
     const api = hookApi();
 
-    const [tags, setTags] = React.useState<Array<ICadConta>>([]);
+    const [tags, setTags] = React.useState<Array<ICadTag>>([]);
 
     const getTags = async () => {
         try {
@@ -24,14 +26,25 @@ const CadTagView = () => {
         }
     }
 
+    const excluirCartao = async (tag: ICadTag) => {
+        try {
+            await api.delete(`/api/tag/delete/${tag.id}`);
+            getTags();
+        } catch (error) {
+            console.error('Erro ao excluir conta: ', error);
+        }
+    }
+
     useEffect(() => {
         getTags();
-    }, []);
+    }, [getTags, tags]);
 
     return (<AppLayout>
-        {tags.map((tag, index) => (
-            <li key={index}>{tag.nome}</li>
-        ))}
+        {tags.map((tag, index) => (<DisplayFlex key={index}>
+            <li>{tag.nome}</li>
+            <Button text='Editar' />
+            <Button text='Excluir' onClick={() => excluirCartao(tag)} />
+        </DisplayFlex>))}
         <ButtonModal modal={ModalAddTag} titleModal='Adicionar tag'
             text='Acicionar' icon={FaPlus} />
 

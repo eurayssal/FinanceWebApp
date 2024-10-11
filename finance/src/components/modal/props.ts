@@ -7,7 +7,7 @@ export interface IModalProps extends PropsWithChildren {
     open?: boolean;
 }
 
-export interface IModalContentProps<T = any> extends PropsWithChildren {
+export interface IModalContentProps extends PropsWithChildren {
     onClose: () => void;
     onReload?: () => void;
 }
