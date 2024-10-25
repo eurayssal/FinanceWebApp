@@ -1,4 +1,5 @@
-﻿using FinanceApi.Controllers.Authorization.Login;
+﻿using System.Security.Cryptography;
+using FinanceApi.Controllers.Authorization.Login;
 using FinanceApi.Controllers.Authorization.ViewModels;
 using FinanceApi.Infra.Encrypt;
 using FinanceApi.Models;
@@ -56,6 +57,12 @@ namespace FinanceApi.Controllers.Authorization
 
             Usuario usuario = await _repository.GetAsync(user.Id, cancellation);
 
+            bool isPasswordValid = VerifyPassword(viewModel.Senha, usuario.Senha);
+            if (!isPasswordValid)
+            {
+                return Unauthorized("E-mail ou senha inválidos.");
+            }
+
             string token = TokenEx<Usuario>.GenerateJwtToken(usuario, jwtSettings);
 
             return Ok(new { AccessToken = token });
@@ -69,6 +76,11 @@ namespace FinanceApi.Controllers.Authorization
 
             }, cancellationToken);
             return Ok(GetUserId());
+        }
+
+        private bool VerifyPassword(string inputPassword, string storedPasswordHash)
+        {
+            return BCrypt.Net.BCrypt.Verify(inputPassword, storedPasswordHash);
         }
     }
 }
