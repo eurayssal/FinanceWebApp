@@ -5,7 +5,7 @@ import hookApi from '../../../hooks/api'
 import Input from '../../../components/input'
 import Button from '../../../components/button'
 
-const dataTag = {
+export const dataTag = {
     nome: ''
 }
 

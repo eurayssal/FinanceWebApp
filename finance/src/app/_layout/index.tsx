@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, startTransition } from 'react'
 import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, LogoJss, RigthConteiner, TopBar } from './jss'
 import ThemeProvider from '../../contexts/provider'
 import ToggleThemeButton from '../../contexts/toggleThemeButton';
@@ -13,7 +13,9 @@ const AppLayout: React.FC<PropsWithChildren> = ({
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        navigate('/site/entrar'); // Redireciona para a página de login após o logout
+        startTransition(() => {
+            navigate('/site/entrar'); // Redireciona para a página de login após o logout
+        })
     };
 
     return (<AppLayoutJss>
