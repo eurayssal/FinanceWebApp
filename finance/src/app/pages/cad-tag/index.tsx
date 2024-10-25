@@ -18,10 +18,7 @@ export interface ICadTag {
 const CadTagView = () => {
     const api = hookApi();
 
-    const [open, setOpen] = React.useState(false);
     const [tags, setTags] = React.useState<Array<ICadTag>>([]);
-    const [newTag, setNewTag] = React.useState(dataTag);
-    const [editag, setEditTag] = React.useState<ICadTag | null>(null);
 
     const getTags = async () => {
         try {
@@ -40,43 +37,7 @@ const CadTagView = () => {
             console.error('Erro ao excluir conta: ', error);
         }
     };
-
-    const editarTag = async (): Promise<void> => {
-        try { 
-            if (editag && editag.id) {
-                console.log('Dados enviados para atualização:', { id: editag.id, nome: newTag.nome });
-
-                const response = await api.put<ICadTag>(
-                    `api/tag/update/${editag.id}`,
-                    {id: editag.id,
-                         nome: newTag.nome }
-                );
     
-                setTags((prev) => {
-                    const updatedTags = prev.map((t) =>
-                        t.id === response.data.id ? response.data : t
-                    );
-                    return updatedTags;
-                });
-    
-                setEditTag(null);
-                setNewTag(dataTag);
-                setOpen(false);
-                getTags();
-            } else {
-                console.error('Edit tag ID is null:', editag);
-            }
-        } catch (error) {
-            console.log('Erro ao editar tag: ', error);
-        }
-    };
-    
-    const handleEditClick = (tag: ICadTag) => {
-        setEditTag(tag);
-        setNewTag({nome: tag.nome});
-        setOpen(true);
-    };
-
     useEffect(() => {
         getTags();
     }, []);
