@@ -5,10 +5,9 @@ import Button from '../button';
 import FormUi from '../form';
 
 const ModalLayout: React.FC<IModalLayoutProps> = ({
-    title, children, onClose, onSubmitAsync
+    title, children, onClose
 }) => {
-    return (<FormUi onSubmitAsync={onSubmitAsync}>
-            <jss.ModalBoxJss onClick={(e) => e.stopPropagation()}>
+    return (<jss.ModalBoxJss onClick={(e) => e.stopPropagation()}>
                 <jss.ModalHeader>
                     <h3>{title}</h3>
                     <Button onClick={onClose} variant='text' text='X' />
@@ -16,8 +15,7 @@ const ModalLayout: React.FC<IModalLayoutProps> = ({
                 <jss.ModalContent>
                     {children}
                 </jss.ModalContent>
-            </jss.ModalBoxJss>
-        </FormUi>);
+            </jss.ModalBoxJss>);
 };
 
 export default ModalLayout;

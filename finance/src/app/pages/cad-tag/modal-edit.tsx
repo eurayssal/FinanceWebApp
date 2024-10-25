@@ -4,6 +4,7 @@ import hookApi from '../../../hooks/api';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 import ModalLayout from '../../../components/modal/layout';
+import FormUi from '../../../components/form';
 
 export interface ICadTag {
     id: string;
@@ -17,7 +18,8 @@ interface ModalEditTagProps extends IModalContentProps {
 
 const ModalEditTag: React.FC<ModalEditTagProps> = ({ tag, onTagUpdated, ...props }) => {
     const api = hookApi();
-    const [updatedTag, setUpdatedTag] = useState<ICadTag>(tag); // Estado para a tag atualizada
+    
+    const [updatedTag, setUpdatedTag] = useState<ICadTag>(tag);
 
     useEffect(() => {
         setUpdatedTag(tag);
@@ -34,10 +36,13 @@ const ModalEditTag: React.FC<ModalEditTagProps> = ({ tag, onTagUpdated, ...props
         }
     };
 
-    return (<ModalLayout {...props} onSubmitAsync={putTag} title={'Editar tag'}>
+    return (<ModalLayout {...props}  title={'Editar tag'}>
+        <FormUi onSubmitAsync={putTag}>
+
             <Input name='nome' label='Nome' type='text' value={updatedTag.nome}
                 onChange={(e) => setUpdatedTag({ ...updatedTag, nome: e.target.value })} />
             <Button type='submit' text='Salvar' />
+                </FormUi>
         </ModalLayout>);
 };
 

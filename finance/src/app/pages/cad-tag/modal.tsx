@@ -4,6 +4,7 @@ import hookApi from '../../../hooks/api';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 import ModalLayout from '../../../components/modal/layout';
+import FormUi from '../../../components/form';
 
 export const dataTag = {
     nome: ''
@@ -39,13 +40,13 @@ const ModalAddTag: React.FC<ModalAddTagProps> = (props) => {
         }
     };
 
-    return (
-        <ModalLayout {...props} onSubmitAsync={postTag} title={'Adicionar tag'}>
+    return (<ModalLayout {...props} title={'Adicionar tag'}>
+        <FormUi onSubmitAsync={postTag}>
             <Input name='nome' label='Nome' type='text' value={newTag.nome}
                 onChange={(e) => setNewTag({ ...newTag, nome: e.target.value })} />
             <Button type='submit' text='Adicionar' />
-        </ModalLayout>
-    );
+        </FormUi>
+    </ModalLayout>);
 };
 
 export default ModalAddTag;

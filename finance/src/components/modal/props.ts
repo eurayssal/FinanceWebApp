@@ -15,5 +15,4 @@ export interface IModalContentProps extends PropsWithChildren {
 
 export interface IModalLayoutProps extends IModalContentProps {
     title: string;
-    onSubmitAsync: (event: FormEvent<HTMLFormElement>) => Promise<void>
 }
