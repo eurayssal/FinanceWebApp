@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import hookApi from '../../../hooks/api';
 import AppLayout from '../../_layout';
 import ButtonModalUi from '../../../components/button-modal';
-import ModalAddTag, {  } from './modal';
-import { FaPlus } from "react-icons/fa6";
+import ModalAddTag from './modal';
+import { FaPlus, FaPen, FaTrash } from "react-icons/fa6";
 import DisplayFlex from '../../../components/display/display-flex';
 import Button from '../../../components/button';
 import ModalEditTag from './modal-edit';
+import { CardJss, SectionJss } from './jss';
 
 export interface ICadTag {
     id: string;
@@ -41,18 +42,32 @@ const CadTagView = () => {
     }, []);
 
     return (<AppLayout>
-        {tags.map((tag, index) => (
-            <DisplayFlex key={index}>
-                <li>{tag.nome}</li>
-                <ButtonModalUi text="Editar"
-                    modal={(props) => (<ModalEditTag {...props} tag={tag} onTagUpdated={getTags} />)} />
-                <Button text="Excluir" onClick={() => excluirTag(tag)} />
+        <SectionJss>
+
+            <DisplayFlex gap={16} flexDirection='column'>
+
+                <DisplayFlex justifyContent='flex-end'>
+                    <ButtonModalUi text="Adicionar" icon={FaPlus}
+                        modal={(props) => <ModalAddTag {...props} onTagAdded={getTags} />} />
+                </DisplayFlex>
+
+                <DisplayFlex gap={4} flexDirection='column'>
+                    {tags.map((tag, index) => (
+                        <CardJss>
+                            <DisplayFlex key={index} alignItems='center' justifyContent='space-between' gap={16}>
+                                <p>{tag.nome}</p>
+                                <DisplayFlex gap={8}>
+                                    <ButtonModalUi variant='icon' icon={FaPen}
+                                        modal={(props) => (<ModalEditTag {...props} tag={tag} onTagUpdated={getTags} />)} />
+                                    <Button variant='icon' icon={FaTrash} onClick={() => excluirTag(tag)} />
+                                </DisplayFlex>
+                            </DisplayFlex>
+                        </CardJss>
+                    ))}
+                </DisplayFlex>
+
             </DisplayFlex>
-        ))}
-
-
-        <ButtonModalUi text="Adicionar" icon={FaPlus}
-            modal={(props) => <ModalAddTag {...props} onTagAdded={getTags} />} />
+        </SectionJss>
     </AppLayout>);
 };
 
