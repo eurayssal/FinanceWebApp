@@ -4,7 +4,7 @@ import Button from '../button';
 import ModalUi from '../modal';
 
 const ButtonModalUi: React.FC<IButtonModalUiProps> = (props) => {
-    const { modal, onReload, titleModal, ...buttonUiProps } = props;
+    const { modal, onReload, ...buttonUiProps } = props;
 
     const [open, setOpen] = React.useState(false);
 
@@ -20,7 +20,7 @@ const ButtonModalUi: React.FC<IButtonModalUiProps> = (props) => {
 
     return (<>
         <Button {...buttonUiProps} onClick={handleOpen} />
-        <ModalUi title={titleModal} content={modal} open={open} {...modalProps} />
+        <ModalUi title='' content={modal} open={open} {...modalProps} />
     </>)
 }
 

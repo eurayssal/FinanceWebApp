@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import hookApi from '../../../hooks/api';
 import AppLayout from '../../_layout';
 import ButtonModalUi from '../../../components/button-modal';
-import ModalAddTag, { dataTag, ITag } from './modal';
+import ModalAddTag, {  } from './modal';
 import { FaPlus } from "react-icons/fa6";
 import DisplayFlex from '../../../components/display/display-flex';
 import Button from '../../../components/button';
-import ModalLayout from '../../../components/modal/layout';
-import Input from '../../../components/input';
 import ModalEditTag from './modal-edit';
 
 export interface ICadTag {
@@ -37,32 +35,25 @@ const CadTagView = () => {
             console.error('Erro ao excluir conta: ', error);
         }
     };
-    
+
     useEffect(() => {
         getTags();
     }, []);
 
     return (<AppLayout>
-                        {tags.map((tag, index) => (
-                <DisplayFlex key={index}>
-                    <li>{tag.nome}</li>
-                    <ButtonModalUi titleModal="Editar tag" 
-                        text="Editar"
-                        modal={(props) => (
-                            <ModalEditTag 
-                                {...props} 
-                                tag={tag} 
-                                onTagUpdated={getTags} />
-                        )}
-                    />
-            <Button text="Excluir" onClick={() => excluirTag(tag)} />
-                </DisplayFlex>
-            ))}
+        {tags.map((tag, index) => (
+            <DisplayFlex key={index}>
+                <li>{tag.nome}</li>
+                <ButtonModalUi text="Editar"
+                    modal={(props) => (<ModalEditTag {...props} tag={tag} onTagUpdated={getTags} />)} />
+                <Button text="Excluir" onClick={() => excluirTag(tag)} />
+            </DisplayFlex>
+        ))}
 
-            
-            <ButtonModalUi titleModal="Adicionar tag" text="Adicionar" icon={FaPlus} 
+
+        <ButtonModalUi text="Adicionar" icon={FaPlus}
             modal={(props) => <ModalAddTag {...props} onTagAdded={getTags} />} />
-        </AppLayout>);
+    </AppLayout>);
 };
 
 export default CadTagView;

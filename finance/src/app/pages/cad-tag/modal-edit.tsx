@@ -11,8 +11,8 @@ export interface ICadTag {
 }
 
 interface ModalEditTagProps extends IModalContentProps {
-    tag: ICadTag; 
-    onTagUpdated?: () => void; 
+    tag: ICadTag;
+    onTagUpdated?: () => void;
 }
 
 const ModalEditTag: React.FC<ModalEditTagProps> = ({ tag, onTagUpdated, ...props }) => {
@@ -34,18 +34,11 @@ const ModalEditTag: React.FC<ModalEditTagProps> = ({ tag, onTagUpdated, ...props
         }
     };
 
-    return (
-        <ModalLayout {...props} onSubmitAsync={putTag} title={'Editar tag'}>
-            <Input
-                name='nome'
-                label='Nome'
-                type='text'
-                value={updatedTag.nome}
-                onChange={(e) => setUpdatedTag({ ...updatedTag, nome: e.target.value })}
-            />
+    return (<ModalLayout {...props} onSubmitAsync={putTag} title={'Editar tag'}>
+            <Input name='nome' label='Nome' type='text' value={updatedTag.nome}
+                onChange={(e) => setUpdatedTag({ ...updatedTag, nome: e.target.value })} />
             <Button type='submit' text='Salvar' />
-        </ModalLayout>
-    );
+        </ModalLayout>);
 };
 
 export default ModalEditTag;

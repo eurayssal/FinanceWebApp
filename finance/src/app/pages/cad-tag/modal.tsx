@@ -28,7 +28,7 @@ const ModalAddTag: React.FC<ModalAddTagProps> = (props) => {
     const [newTag, setNewTag] = useState<ICadTag>(dataTag);
 
     const postTag = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); 
+        event.preventDefault();
         try {
             await api.post('/api/tag/create', newTag);
             setNewTag(dataTag);
@@ -42,7 +42,7 @@ const ModalAddTag: React.FC<ModalAddTagProps> = (props) => {
     return (
         <ModalLayout {...props} onSubmitAsync={postTag} title={'Adicionar tag'}>
             <Input name='nome' label='Nome' type='text' value={newTag.nome}
-                onChange={(e) => setNewTag({ ...newTag, nome: e.target.value })}/>
+                onChange={(e) => setNewTag({ ...newTag, nome: e.target.value })} />
             <Button type='submit' text='Adicionar' />
         </ModalLayout>
     );
