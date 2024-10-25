@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { FormEvent, PropsWithChildren } from "react";
 
 export interface IModalProps extends PropsWithChildren {
     title: string;
@@ -15,5 +15,5 @@ export interface IModalContentProps extends PropsWithChildren {
 
 export interface IModalLayoutProps extends IModalContentProps {
     title: string;
-    onSubmitAsync?: () => Promise<void>
+    onSubmitAsync: (event: FormEvent<HTMLFormElement>) => Promise<void>
 }

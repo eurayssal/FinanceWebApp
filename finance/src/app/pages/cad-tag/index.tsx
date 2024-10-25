@@ -1,15 +1,14 @@
-// CadTagView.tsx
 import React, { useEffect } from 'react';
 import hookApi from '../../../hooks/api';
 import AppLayout from '../../_layout';
-import ButtonModal from '../../../components/button-modal';
+import ButtonModalUi from '../../../components/button-modal';
 import ModalAddTag, { dataTag, ITag } from './modal';
 import { FaPlus } from "react-icons/fa6";
 import DisplayFlex from '../../../components/display/display-flex';
 import Button from '../../../components/button';
 import ModalLayout from '../../../components/modal/layout';
 import Input from '../../../components/input';
-import Form from '../../../components/form';
+import ModalEditTag from './modal-edit';
 
 export interface ICadTag {
     id: string;
@@ -72,8 +71,6 @@ const CadTagView = () => {
         }
     };
     
-    
-
     const handleEditClick = (tag: ICadTag) => {
         setEditTag(tag);
         setNewTag({nome: tag.nome});
@@ -84,37 +81,27 @@ const CadTagView = () => {
         getTags();
     }, []);
 
-    return (
-        <AppLayout>
-            {open && (
-                <ModalLayout title={'Editar tag'} onClose={() => setOpen(false)}>
-                    <Form
-                        onSubmitAsync={async (e) => {
-                            e.preventDefault();
-                            await editarTag();
-                        }}
-                    >
-                        <Input
-                            name="nome"
-                            label="Nome"
-                            type="text"
-                            value={newTag.nome}
-                            onChange={(e) => setNewTag({ ...newTag, nome: e.target.value })}
-                        />
-                        <Button type="submit" text="Salvar" />
-                    </Form>
-                </ModalLayout>
-            )}
-            {tags.map((tag, index) => (
+    return (<AppLayout>
+                        {tags.map((tag, index) => (
                 <DisplayFlex key={index}>
                     <li>{tag.nome}</li>
-                    <Button text="Editar" onClick={() => handleEditClick(tag)} />
-                    <Button text="Excluir" onClick={() => excluirTag(tag)} />
+                    <ButtonModalUi titleModal="Editar tag" 
+                        text="Editar"
+                        modal={(props) => (
+                            <ModalEditTag 
+                                {...props} 
+                                tag={tag} 
+                                onTagUpdated={getTags} />
+                        )}
+                    />
+            <Button text="Excluir" onClick={() => excluirTag(tag)} />
                 </DisplayFlex>
             ))}
-            <ButtonModal modal={ModalAddTag} titleModal="Adicionar tag" text="Adicionar" icon={FaPlus} />
-        </AppLayout>
-    );
+
+            
+            <ButtonModalUi titleModal="Adicionar tag" text="Adicionar" icon={FaPlus} 
+            modal={(props) => <ModalAddTag {...props} onTagAdded={getTags} />} />
+        </AppLayout>);
 };
 
 export default CadTagView;

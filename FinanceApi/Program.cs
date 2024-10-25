@@ -27,7 +27,7 @@ JwtSettings GetJwtSettings()
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
 
 // Registrar o MongoDbContext e os repositórios
 builder.Services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));

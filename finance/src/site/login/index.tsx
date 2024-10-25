@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SiteLayout from '../_layout';
-import Form from '../../components/form';
+import FormUi from '../../components/form';
 import { useNavigate } from 'react-router-dom';
 import hookApi from '../../hooks/api';
 import Input from '../../components/input';
@@ -36,7 +36,7 @@ const LoginView: React.FC = () => {
     return (<SiteLayout>
         <DisplayFlex height='90vh' justifyContent='center' alignItems='center' flexDirection='column'>
             <SectionJss>
-                <Form onSubmitAsync={handleLogin}>
+                <FormUi onSubmitAsync={handleLogin}>
                     <DisplayFlex flexDirection='column' gap={32} alignItems='center'>
 
                         <DisplayFlex flexDirection='column' alignItems='center' gap={32}>
@@ -60,7 +60,7 @@ const LoginView: React.FC = () => {
                             </DisplayFlex>
                         </DisplayFlex>
                     </DisplayFlex>
-                </Form>
+                </FormUi>
             </SectionJss>
         </DisplayFlex>
 

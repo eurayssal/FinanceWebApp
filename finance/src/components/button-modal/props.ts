@@ -8,7 +8,7 @@ export interface IModalUiProsp<T = any> extends PropsWithChildren {
 }
 
 export interface IButtonModalUiProps extends IButtonUiProps {
-    modal: React.FC<IModalContentProps>
+    modal: React.FC<any>
     onReload?: () => void;
     titleModal: string;
 }
