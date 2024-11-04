@@ -1,16 +1,23 @@
 import React from 'react'
-import Button from '../../components/button'
 import SiteLayout from '../_layout'
-import { useNavigate } from 'react-router-dom';
+import { ImgBanner1Jss, BannerJss, CtaJss } from './jss'
+import { FaArrowRight } from 'react-icons/fa'
+import DisplayFlex from '../../components/display/display-flex'
+import Banner1 from '../../assets/banner-1.svg';
 
 const LandingPageView: React.FC = () => {
-    const navigate = useNavigate();
-
-    const handleClick = () => navigate('/site/entrar');
-
     return (<SiteLayout>
-        <Button text='Entrar' onClick={handleClick} />
-        <Button text='Registrar' variant='secondary' />
+        <BannerJss>
+            <DisplayFlex flexDirection='column' alignItems='flex-start'
+                justifyContent='center' width={400} height={300} gap={32}>
+                <DisplayFlex flexDirection='column'>
+                    <h1>Organize suas finanças de forma fácil e rápida</h1>
+                    <p>Tenha controle total dos seus gastos e aumente sua economia sem complicação.</p>
+                </DisplayFlex>
+                <CtaJss>Testar grátis<FaArrowRight /></CtaJss>
+            </DisplayFlex>
+            <ImgBanner1Jss src={Banner1} />
+        </BannerJss>
     </SiteLayout>)
 }
 

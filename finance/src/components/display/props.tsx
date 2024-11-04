@@ -9,6 +9,10 @@ export interface IDisplayFlexProps extends PropsWithChildren {
     gap?: number,
     width?: string | number,
     height?: string | number,
+    maxWidth?: string | number,
+    minWidth?: string | number,
+    maxHeight?: string | number,
+    minHeight?: string | number,
 }
 
 export interface IDisplayGridProps extends PropsWithChildren {

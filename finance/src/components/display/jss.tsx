@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { IDisplayFlexProps, IDisplayGridProps } from './props'
 
 export const DisplayFlexJss = styled.div<IDisplayFlexProps>((
-    { flexDirection, justifyContent, alignItems, flexWrap, gap, width, height }
+    { flexDirection, justifyContent, alignItems, flexWrap, gap, width, height, maxWidth,maxHeight, minHeight, minWidth }
 ) => {
     return {
         display: 'flex',
@@ -12,7 +12,11 @@ export const DisplayFlexJss = styled.div<IDisplayFlexProps>((
         flexWrap,
         gap,
         width,
-        height
+        height,
+        maxHeight,
+        maxWidth,
+        minHeight,
+        minWidth
     }
 })
 

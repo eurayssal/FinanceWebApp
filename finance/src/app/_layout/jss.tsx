@@ -14,8 +14,8 @@ export const AppLayoutJss = styled.div({
 export const TopBar = styled.div(() => {
     const theme = useContext(ThemeContext);
     return {
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
+        // paddingLeft: '2rem',
+        // paddingRight: '2rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: "space-around",
