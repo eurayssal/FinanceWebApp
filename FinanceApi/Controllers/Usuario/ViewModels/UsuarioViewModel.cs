@@ -14,5 +14,8 @@ namespace FinanceApi.Controllers.Authorization.ViewModels
         [Required]
         [MinLength(6)]
         public string Senha { get; set; }
+
+        [MinLength(6)]
+        public string ConfirmSenha { get; set; }
     }
 }

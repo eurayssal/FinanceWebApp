@@ -15,7 +15,6 @@ export const CtaJss = styled.button(() => {
         fontWeight: 600,
         padding: 16,
         borderRadius: 8,
-        boxShadow: '4px 4px 7px rgb(5 145 255 / 43%)'
     }
 })
 

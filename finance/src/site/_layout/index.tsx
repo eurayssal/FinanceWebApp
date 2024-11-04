@@ -11,7 +11,8 @@ const SiteLayout: React.FC<PropsWithChildren> = ({
 }) => {
     const navigate = useNavigate();
 
-    const handleClick = () => navigate('/site/entrar');
+    const navigateToLogin = () => navigate('/site/entrar');
+    const navigateToRegister = () => navigate('/site/registrar');
 
     return (<AppLayoutJss>
         <ThemeProvider>
@@ -20,8 +21,8 @@ const SiteLayout: React.FC<PropsWithChildren> = ({
                     <LogoJss src={LogoColorida} />
                 </RigthConteiner>
                 <LeftConteiner>
-                    <Button text='Registrar' variant='secondary' />
-                    <Button text='Entrar' onClick={handleClick} />
+                    <Button text='Registrar' variant='secondary' onClick={navigateToRegister} />
+                    <Button text='Entrar' onClick={navigateToLogin} />
                 </LeftConteiner>
             </TopBar>
             {children}

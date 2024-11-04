@@ -27,13 +27,22 @@ namespace FinanceApi.Controllers.Authorization
                     return BadRequest(new { message = "E-mail já está em uso." });
                 }
 
-                if (string.IsNullOrEmpty(viewModel.Email) || string.IsNullOrEmpty(viewModel.Senha))
+                if (string.IsNullOrEmpty(viewModel.Email)
+                    || string.IsNullOrEmpty(viewModel.Senha)
+                    || string.IsNullOrEmpty(viewModel.ConfirmSenha))
                 {
-                    throw new ArgumentException("E-mail e senha são obrigatórios.");
+                    throw new ArgumentException("Todos os campos são obrigatórios.");
                 }
 
                 var senhaEncriptada = BCrypt.Net.BCrypt.HashPassword(viewModel.Senha);
 
+                if (viewModel.Senha != viewModel.ConfirmSenha)
+                {
+                    return BadRequest(new { message = "As senhas não conferem." });
+                }
+
+                //TODO: Ajustar o UserId. Ele dever ser criado no momento da criação da conta.
+                //No entanto ele esta sendo gerado ao criar a tag. La ele deveria ser somente pego.
                 var novoUsuario = new Usuario(viewModel.Nome,
                     viewModel.Email,
                     senhaEncriptada);
@@ -43,6 +52,7 @@ namespace FinanceApi.Controllers.Authorization
                 await _repository.InsertAsync(novoUsuario, cancellation);
 
                 return Ok(new { message = "Usuário registrado com sucesso." });
+
             }
             catch (Exception ex)
             {
