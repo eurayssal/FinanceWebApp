@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ThemeContext from ".";
-import Button from "../components/button";
 import { FaMoon, FaSun } from "react-icons/fa";
+import Button from "../../components/button";
 
 const ToggleThemeButton: React.FC = () => {
     const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);

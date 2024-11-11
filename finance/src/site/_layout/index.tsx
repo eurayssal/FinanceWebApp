@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import { AppLayoutJss, Footer } from './jss'
-import ThemeProvider from '../../contexts/provider'
+import ThemeProvider from '../../contexts/theme/provider'
 import { LeftConteiner, LogoJss, RigthConteiner, TopBar } from '../../app/_layout/jss'
 import { useNavigate } from 'react-router-dom'
 import Button from '../../components/button'

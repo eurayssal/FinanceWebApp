@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useContext } from "react";
-import ThemeContext from "../../contexts";
+import ThemeContext from "../../contexts/theme";
 import { IInputProps } from "./props";
 
 export const InputJss = styled.input(() => {

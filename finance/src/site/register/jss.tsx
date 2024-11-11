@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useContext } from "react";
-import ThemeContext from "../../contexts";
+import ThemeContext from "../../contexts/theme";
 
 export const SectionJss = styled.div(() => {
     const theme = useContext(ThemeContext);
@@ -37,7 +37,7 @@ export const LogoJss = styled.img(() => {
 })
 
 export const SubTitleJss = styled.p(function () {
-    return{
+    return {
         textAlign: "center"
     }
 })

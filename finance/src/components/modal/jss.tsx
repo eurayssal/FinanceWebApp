@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import ThemeContext from "../../contexts";
+import ThemeContext from "../../contexts/theme";
 import { useContext } from "react";
 
 

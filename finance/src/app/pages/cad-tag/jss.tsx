@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useContext } from "react";
-import ThemeContext from "../../../contexts";
+import ThemeContext from "../../../contexts/theme";
 
 export const CardJss = styled.div(() => {
     const theme = useContext(ThemeContext);
@@ -10,8 +10,8 @@ export const CardJss = styled.div(() => {
         padding: '4px 16px',
         cursor: 'pointer',
 
-        ':hover':{
-            backgroundColor:  theme.pallete.fill.colorFillSecondary
+        ':hover': {
+            backgroundColor: theme.pallete.fill.colorFillSecondary
         }
     }
 });

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import IButtonUiProps from "./props";
 import { useContext } from "react";
-import ThemeContext from "../../contexts";
+import ThemeContext from "../../contexts/theme";
 
 export const ButtonJss = styled.button<IButtonUiProps>(({ variant }) => {
     const theme = useContext(ThemeContext);
