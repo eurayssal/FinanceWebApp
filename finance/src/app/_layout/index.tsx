@@ -18,8 +18,6 @@ const AppLayout: React.FC<PropsWithChildren> = ({
         })
     };
 
-    const options = {}
-
     return (<AppLayoutJss>
         <ThemeProvider>
             <TopBar>
@@ -27,7 +25,7 @@ const AppLayout: React.FC<PropsWithChildren> = ({
                     {/* <LogoJss src={LogoColorida} /> */}
                 </RigthConteiner>
                 <LeftConteiner>
-                    <DropdownUi text='Cadastros' options={[{ title: 'Cadastrar tag', onClick: () => navigate('/app/tag') }]} />
+                    <DropdownUi variant='link' text='Cadastros' options={[{ title: 'Cadastrar tag', onClick: () => navigate('/app/tag') }]} />
                     <ToggleThemeButton />
                     <ButtonUi text='Sair' variant='danger' title='Sair' onClick={handleLogout} />
                 </LeftConteiner>
