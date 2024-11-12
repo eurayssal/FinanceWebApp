@@ -5,7 +5,7 @@ import ThemeContext from "../../../contexts/theme";
 export const CardJss = styled.div(() => {
     const theme = useContext(ThemeContext);
     return {
-        backgroundColor: 'white',
+        backgroundColor: theme.pallete.background.colorBgContainer,
         borderRadius: 8,
         padding: '4px 16px',
         cursor: 'pointer',

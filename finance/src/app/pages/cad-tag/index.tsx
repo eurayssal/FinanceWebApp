@@ -9,7 +9,7 @@ import Button from '../../../components/button';
 import ModalEditTag from './modal-edit';
 import { CardJss, SectionJss } from './jss';
 
-export interface ICadTag {
+export interface ICadTagModel {
     id: string;
     nome: string;
 }
@@ -17,18 +17,18 @@ export interface ICadTag {
 const CadTagView = () => {
     const api = hookApi();
 
-    const [tags, setTags] = React.useState<Array<ICadTag>>([]);
+    const [data, setData] = React.useState<Array<ICadTagModel>>([])
 
     const getTags = async () => {
         try {
             const response = await api.get('/api/tag');
-            setTags(response.data);
+            setData(response.data);
         } catch (error) {
             console.error('Erro ao obter tags: ', error);
         }
     };
 
-    const excluirTag = async (tag: ICadTag) => {
+    const excluirTag = async (tag: ICadTagModel) => {
         try {
             await api.delete(`/api/tag/delete/${tag.id}`);
             getTags();
@@ -52,14 +52,14 @@ const CadTagView = () => {
                 </DisplayFlex>
 
                 <DisplayFlex gap={4} flexDirection='column'>
-                    {tags.map((tag, index) => (
+                    {data.map((item, index) => (
                         <CardJss>
                             <DisplayFlex key={index} alignItems='center' justifyContent='space-between' gap={16}>
-                                <p>{tag.nome}</p>
+                                <p>{item.nome}</p>
                                 <DisplayFlex gap={8}>
                                     <ButtonModalUi variant='icon' icon={FaPen}
-                                        modal={(props) => (<ModalEditTag {...props} tag={tag} onTagUpdated={getTags} />)} />
-                                    <Button variant='icon' icon={FaTrash} onClick={() => excluirTag(tag)} />
+                                        modal={(props) => (<ModalEditTag {...props} tag={item} onTagUpdated={getTags} />)} />
+                                    <Button variant='icon' icon={FaTrash} onClick={() => excluirTag(item)} />
                                 </DisplayFlex>
                             </DisplayFlex>
                         </CardJss>
