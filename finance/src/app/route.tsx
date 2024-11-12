@@ -1,17 +1,15 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import HomeView from './pages/home';
-import CadTagView from './pages/cad-tag';
-import useAuth from '../hooks/auth';
+import { Provider } from '../hooks/auth';
 
 const AppRoute: React.FC = () => {
-    useAuth();
-
-    return (<Routes>
-        <Route index element={<Navigate to='home' />} />
-        <Route path="home" element={<HomeView />} />
-        <Route path="tag" element={<CadTagView />} />
-    </Routes>);
+    return (<Provider>
+        <Routes>
+            <Route index element={<Navigate to='home' />} />
+            <Route path="home" element={<HomeView />} />
+        </Routes >
+    </Provider>);
 };
 
 export default AppRoute;

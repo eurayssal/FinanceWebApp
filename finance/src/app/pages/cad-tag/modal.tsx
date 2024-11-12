@@ -1,23 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IModalContentProps } from '../../../components/modal/props';
 import hookApi from '../../../hooks/api';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 import ModalLayout from '../../../components/modal/layout';
 import FormUi from '../../../components/form';
-
-export const dataTag = {
-    nome: ''
-};
-
-export interface ITag {
-    id: string;
-    nome: string;
-}
-
-export interface ICadTag {
-    nome: string;
-}
 
 interface ModalAddTagProps extends IModalContentProps {
     onTagAdded?: () => void;
@@ -26,13 +13,12 @@ interface ModalAddTagProps extends IModalContentProps {
 const ModalAddTag: React.FC<ModalAddTagProps> = (props) => {
     const api = hookApi();
 
-    const [newTag, setNewTag] = useState<ICadTag>(dataTag);
+    const [data, setData] = React.useState<any>('');
 
     const postTag = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            await api.post('/api/tag/create', newTag);
-            setNewTag(dataTag);
+            await api.post('/api/tag/create', data);
             props.onClose && props.onClose();
             props.onTagAdded && props.onTagAdded();
         } catch (error) {
@@ -40,10 +26,14 @@ const ModalAddTag: React.FC<ModalAddTagProps> = (props) => {
         }
     };
 
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setData({ ...data, [name]: value });
+    };
+
     return (<ModalLayout {...props} title={'Adicionar tag'}>
         <FormUi onSubmitAsync={postTag}>
-            <Input name='nome' label='Nome' type='text' value={newTag.nome}
-                onChange={(e) => setNewTag({ ...newTag, nome: e.target.value })} />
+            <Input name='nome' label='Nome' type='text' onChange={handleInputChange} />
             <Button type='submit' text='Adicionar' />
         </FormUi>
     </ModalLayout>);

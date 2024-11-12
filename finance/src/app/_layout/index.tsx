@@ -1,10 +1,9 @@
 import React, { PropsWithChildren, startTransition } from 'react'
-import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, LogoJss, RigthConteiner, TopBar } from './jss'
+import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, RigthConteiner, TopBar } from './jss'
 import ThemeProvider from '../../contexts/theme/provider'
 import ToggleThemeButton from '../../contexts/theme/toggleThemeButton';
 import Button from '../../components/button';
 import { useNavigate } from 'react-router-dom';
-import LogoColorida from '../../assets/logo-colorida.svg';
 
 const AppLayout: React.FC<PropsWithChildren> = ({
     children
