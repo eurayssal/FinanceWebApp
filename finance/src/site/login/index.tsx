@@ -4,7 +4,7 @@ import FormUi from '../../components/form';
 import { useNavigate } from 'react-router-dom';
 import hookApi from '../../hooks/api';
 import Input from '../../components/input';
-import Button from '../../components/button';
+import ButtonUi from '../../components/button';
 import DisplayFlex from '../../components/display/display-flex';
 import { LogoJss, ParagraphJss, SectionJss, TitleJss } from './jss';
 import LogoColorida from '../../assets/logo-colorida.svg';
@@ -51,10 +51,10 @@ const LoginView: React.FC = () => {
                         </DisplayFlex>
 
                         <DisplayFlex flexDirection='column' gap={16}>
-                            <Button text='Entrar' type='submit' />
+                            <ButtonUi text='Entrar' type='submit' />
                             <DisplayFlex alignItems='center'>
                                 <ParagraphJss>Ainda não possui conta?</ParagraphJss>
-                                <Button text='Faça o cadastro!' variant='link' onClick={() => navigate('/site/registrar')} />
+                                <ButtonUi text='Faça o cadastro!' variant='link' onClick={() => navigate('/site/registrar')} />
                             </DisplayFlex>
                         </DisplayFlex>
                     </DisplayFlex>

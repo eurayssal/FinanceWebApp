@@ -1,6 +1,6 @@
 import React from 'react'
 import { IButtonModalUiProps } from './props'
-import Button from '../button';
+import ButtonUi from '../button';
 import ModalUi from '../modal';
 
 const ButtonModalUi: React.FC<IButtonModalUiProps> = (props) => {
@@ -19,7 +19,7 @@ const ButtonModalUi: React.FC<IButtonModalUiProps> = (props) => {
     const modalProps = { onClose: handleClose, onReload }
 
     return (<>
-        <Button {...buttonUiProps} onClick={handleOpen} />
+        <ButtonUi {...buttonUiProps} onClick={handleOpen} />
         <ModalUi title='' content={modal} open={open} {...modalProps} />
     </>)
 }

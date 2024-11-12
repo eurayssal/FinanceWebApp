@@ -101,4 +101,5 @@ interface IShadow {
     defaultShadow: string;
     dangerShadow: string;
     primaryShadow: string;
+    secondarySadow: string;
 }

@@ -2,8 +2,9 @@ import React, { PropsWithChildren, startTransition } from 'react'
 import { AppLayoutJss, Footer, LayoutContainerJss, LeftConteiner, RigthConteiner, TopBar } from './jss'
 import ThemeProvider from '../../contexts/theme/provider'
 import ToggleThemeButton from '../../contexts/theme/toggleThemeButton';
-import Button from '../../components/button';
+import ButtonUi from '../../components/button';
 import { useNavigate } from 'react-router-dom';
+import DropdownUi from '../../components/dropdown';
 
 const AppLayout: React.FC<PropsWithChildren> = ({
     children
@@ -17,6 +18,8 @@ const AppLayout: React.FC<PropsWithChildren> = ({
         })
     };
 
+    const options = {}
+
     return (<AppLayoutJss>
         <ThemeProvider>
             <TopBar>
@@ -24,8 +27,9 @@ const AppLayout: React.FC<PropsWithChildren> = ({
                     {/* <LogoJss src={LogoColorida} /> */}
                 </RigthConteiner>
                 <LeftConteiner>
+                    <DropdownUi text='Cadastros' options={[{ title: 'Cadastrar tag', onClick: () => navigate('/app/tag') }]} />
                     <ToggleThemeButton />
-                    <Button text='Sair' variant='danger' title='Sair' onClick={handleLogout} />
+                    <ButtonUi text='Sair' variant='danger' title='Sair' onClick={handleLogout} />
                 </LeftConteiner>
             </TopBar>
 

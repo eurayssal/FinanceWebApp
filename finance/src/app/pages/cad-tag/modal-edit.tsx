@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IModalContentProps } from '../../../components/modal/props';
 import hookApi from '../../../hooks/api';
 import Input from '../../../components/input';
-import Button from '../../../components/button';
+import ButtonUi from '../../../components/button';
 import ModalLayout from '../../../components/modal/layout';
 import FormUi from '../../../components/form';
 
@@ -18,7 +18,7 @@ interface ModalEditTagProps extends IModalContentProps {
 
 const ModalEditTag: React.FC<ModalEditTagProps> = ({ tag, onTagUpdated, ...props }) => {
     const api = hookApi();
-    
+
     const [updatedTag, setUpdatedTag] = useState<ICadTag>(tag);
 
     useEffect(() => {
@@ -36,14 +36,14 @@ const ModalEditTag: React.FC<ModalEditTagProps> = ({ tag, onTagUpdated, ...props
         }
     };
 
-    return (<ModalLayout {...props}  title={'Editar tag'}>
+    return (<ModalLayout {...props} title={'Editar tag'}>
         <FormUi onSubmitAsync={putTag}>
 
             <Input name='nome' label='Nome' type='text' value={updatedTag.nome}
                 onChange={(e) => setUpdatedTag({ ...updatedTag, nome: e.target.value })} />
-            <Button type='submit' text='Salvar' />
-                </FormUi>
-        </ModalLayout>);
+            <ButtonUi type='submit' text='Salvar' />
+        </FormUi>
+    </ModalLayout>);
 };
 
 export default ModalEditTag;

@@ -6,7 +6,7 @@ const Icon: React.FC<IconProps> = ({ icon: IconComponent }) => {
     return <IconComponent />
 }
 
-const Button: React.FC<IButtonUiProps> = ({
+const ButtonUi: React.FC<IButtonUiProps> = ({
     text, onClick, variant = 'primary', type = 'submit', icon, iconPosition = 'start'
 }) => {
     var variantProp = icon ? 'icon' : variant
@@ -21,4 +21,4 @@ const Button: React.FC<IButtonUiProps> = ({
     </ButtonJss>)
 }
 
-export default Button;
+export default ButtonUi;

@@ -5,7 +5,7 @@ import SiteLayout from '../_layout';
 import DisplayFlex from '../../components/display/display-flex';
 import FormUi from '../../components/form';
 import Input from '../../components/input';
-import Button from '../../components/button';
+import ButtonUi from '../../components/button';
 import { ParagraphJss, SectionJss, TitleJss, SubTitleJss } from './jss';
 
 const RegisterView: React.FC = () => {
@@ -53,15 +53,15 @@ const RegisterView: React.FC = () => {
                             <Input label='Senha' name='senha' type="password" value={senha} minWidth={350} maxWidth={350}
                                 onChange={(e) => setSenha(e.target.value)} required />
                             <Input label='Confirmação de senha' name='confirm-senha' type="password" value={confirmSenha}
-                            minWidth={350} maxWidth={350} onChange={(e) => setConfirmSenha(e.target.value)} required />
+                                minWidth={350} maxWidth={350} onChange={(e) => setConfirmSenha(e.target.value)} required />
                             {error && <p style={{ color: 'red' }}>{error}</p>}
                         </DisplayFlex>
 
                         <DisplayFlex flexDirection='column' gap={16}>
-                            <Button text='Entrar' type='submit' />
+                            <ButtonUi text='Entrar' type='submit' />
                             <DisplayFlex alignItems='center'>
                                 <ParagraphJss>Já possui uma conta?</ParagraphJss>
-                                <Button text='Entrar' variant='link' onClick={() => navigate('/site/entrar')} />
+                                <ButtonUi text='Entrar' variant='link' onClick={() => navigate('/site/entrar')} />
                             </DisplayFlex>
                         </DisplayFlex>
                     </DisplayFlex>

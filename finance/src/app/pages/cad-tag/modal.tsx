@@ -2,7 +2,7 @@ import React from 'react';
 import { IModalContentProps } from '../../../components/modal/props';
 import hookApi from '../../../hooks/api';
 import Input from '../../../components/input';
-import Button from '../../../components/button';
+import ButtonUi from '../../../components/button';
 import ModalLayout from '../../../components/modal/layout';
 import FormUi from '../../../components/form';
 
@@ -34,7 +34,7 @@ const ModalAddTag: React.FC<ModalAddTagProps> = (props) => {
     return (<ModalLayout {...props} title={'Adicionar tag'}>
         <FormUi onSubmitAsync={postTag}>
             <Input name='nome' label='Nome' type='text' onChange={handleInputChange} />
-            <Button type='submit' text='Adicionar' />
+            <ButtonUi type='submit' text='Adicionar' />
         </FormUi>
     </ModalLayout>);
 };
