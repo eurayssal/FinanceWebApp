@@ -32,7 +32,7 @@ export const BoxDropdownJss = styled.div<{ dropUp: boolean }>(({
         bottom: dropUp ? '100%' : 'auto',
         left: 0,
         borderRadius: 8,
-        backgroundColor: '#fff',
+        background: theme.pallete.background.colorBgElevated,
         boxShadow: theme.pallete.shadow.secondarySadow,
         zIndex: 1000,
     }
